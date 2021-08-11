@@ -19,7 +19,6 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "dev:server": "nodemon --watch './**/*.tsx' --exec 'ts-node' server.ts",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -43,8 +42,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "nodemon": "^2.0.12",
-    "ts-node": "^10.2.0"
-  }
+  "devDependencies": {}
 }

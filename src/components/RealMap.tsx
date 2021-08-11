@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function RightContainer() {
+export default function RealMap() {
     return (
         <div>
-            
+            REAL MAP
         </div>
     )
 }
