@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { Route, Switch, Redirect, Link } from "react-router-dom";
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Dashboard from "./components/firstlayer/secondlayer/Dashboard";
+import Register from "./components/Register";
+import Tweets from "./components/firstlayer/secondlayer/Tweets";
+import AboutUs from "./components/firstlayer/secondlayer/AboutUs";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <main>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/tweets" component={Tweets} />
+          <Route path="/aboutus" component={AboutUs} />
+          <Redirect to="/" />
+        </Switch>
+      </main>
     </div>
   );
 }
