@@ -36,3 +36,62 @@
     transform: rotate(360deg);
   }
 }
+
+
+.tweetContainer {
+  box-sizing: border-box;
+  border: 1px solid black;
+  height: 200px;
+  width: 800px;
+  border-radius: 10px;
+  margin: 50px auto 50px auto;
+  color: #FEFFFF;
+  background-color: #17252a;
+  padding: 50px;
+}
+
+.tweetPost {
+  box-sizing: border-box;
+  border: 1px solid black;
+  height: 100px;
+  width: 800px;
+  border-radius: 10px;
+  margin: 50px auto 50px auto;
+  color: #FEFFFF;
+  background-color: #17252a;
+  overflow: hidden;
+  padding: 0px;
+}
+
+.textBox {
+  height: 70px;
+  width: 100%;
+  border-radius: 10px;
+  border:hidden;
+  box-sizing: border-box;
+}
+
+.buttonContainer {
+  float:right;
+  margin-right: 5px;
+}
+
+
+.horizontalList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.formButton {
+  float:left;
+  padding-left: 12px;
+}
+
+textarea {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  outline:none;
+}
+
