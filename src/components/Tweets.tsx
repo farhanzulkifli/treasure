@@ -1,4 +1,4 @@
-import React, { CSSProperties, useState } from "react";
+import React, { CSSProperties, useState, useReducer } from "react";
 
 const maxLength = 150;
 
@@ -7,19 +7,33 @@ const italic: CSSProperties = {
 };
 
 const bold: CSSProperties = {
-    fontWeight: "bold",
-  };
+  fontWeight: "bold",
+};
 
 const underline: CSSProperties = {
-    textDecoration: "underline",
+  textDecoration: "underline",
+};
+
+const normal: CSSProperties = {
+  fontStyle: "normal",
+};
+
+function reducer(state: any, action: any): any {
+  switch (action.type) {
+    case "bold":
+      return (state = bold);
+    case "italic":
+      return (state = italic);
+    case "underline":
+      return (state = underline);
+    default:
+      return (state = normal);
+  }
 }
 
-
 export default function Tweets() {
-const [boldStyle, setBoldStyle] = useState<CSSProperties>()
-const [itaStyle, setItaStyle] = useState<CSSProperties>()
-const [ulStyle, setUlStyle] = useState<CSSProperties>()
-const [fontStyle, setFontStyle] = useState<CSSProperties>()
+  const [font, dispatch] = useReducer(reducer, normal);
+
   return (
     <>
       <div className="tweetContainer">
@@ -37,19 +51,32 @@ const [fontStyle, setFontStyle] = useState<CSSProperties>()
             className="textBox"
             placeholder="Tweet Here"
             maxLength={maxLength}
-            style={fontStyle}
+            style={font}
             required
-          >
-              </textarea>
-               <div className="buttonContainer"><button className="submitButton">Submit</button></div>
+          ></textarea>
+          <div className="buttonContainer">
+            <button className="submitButton">Submit</button>
+          </div>
           <ul className="horizontalList">
-            <li className="formButton" onClick={() => setFontStyle(bold) } style={bold}>
+            <li
+              className="formButton"
+              onClick={() => dispatch({ type: "bold" })}
+              style={bold}
+            >
               B
             </li>
-            <li className="formButton" onClick={() => setItaStyle(italic)}style={italic}>
+            <li
+              className="formButton"
+              onClick={() => dispatch({ type: "italic" })}
+              style={italic}
+            >
               I
             </li>
-            <li className="formButton" onClick={() => setUlStyle(underline)} style={underline}>
+            <li
+              className="formButton"
+              onClick={() => dispatch({ type: "underline" })}
+              style={underline}
+            >
               U
             </li>
           </ul>
