@@ -8,9 +8,10 @@ import {
 import MapStyles from "./MapStyles";
 import { useEffect, useState, useCallback, useRef } from "react";
 import treasure from "./treasure.svg";
+import { Link, useRouteMatch } from "react-router-dom";
 
 //importing libraries
-const libraries = ["places"];
+// const libraries = ["places"];
 
 //fake data
 const locations = [
@@ -49,10 +50,13 @@ const MapOptions = {
 const RealMap = () => {
   //setting the state for markers
   //   const [map, setMap] = React.useState(null)
+  let { url } = useRouteMatch();
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
-  //   const [zoom, setZoom] = useState(12);
-  //   const [center, setCenter] = useState({ lat: 1.3521, lng: 103.8198 });
+  const [zoom, setZoom] = useState(12);
+  const [center, setCenter] = useState({ lat: 1.3521, lng: 103.8198 });
+// const zoom = useRef(12)
+// const center = useRef({ lat: 1.3521, lng: 103.8198 })
 
   //calling api for markers
   useEffect(() => {
@@ -64,15 +68,15 @@ const RealMap = () => {
     mapRef.current = map;
   }, []);
 
-  const panTo = (marker) => {
+  const panTo = useCallback((marker) => {
     mapRef.current.setZoom(15);
-    mapRef.current.panTo({ lat:marker.lat , lng:marker.lng });
-  }
+    mapRef.current.panTo({ lat: marker.lat, lng: marker.lng });
+  }, []);
 
   //when loaded, processes the map. If loading, writes a loading message. I not loaded, throws an error message.
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_API_KEY,
-    libraries,
+    // libraries,
   });
   if (loadError) return "Map loading error";
   if (!isLoaded) return "Loading Map";
@@ -80,14 +84,14 @@ const RealMap = () => {
   return (
     <GoogleMap
       mapContainerStyle={containerStyle}
-      center={{ lat: 1.3521, lng: 103.8198 }}
-      zoom={12}
+      center={center}
+      zoom={zoom}
       options={MapOptions}
       onLoad={onMapLoad}
       onClick={() => {
         setSelected(null);
-      }}>
-
+      }}
+    >
       {markers.map((marker) => {
         return (
           <Marker
@@ -100,16 +104,15 @@ const RealMap = () => {
               origin: new window.google.maps.Point(0, 0),
               anchor: new window.google.maps.Point(15, 15),
             }}
-            onClick={() =>{
-                setSelected(marker)
-                panTo(marker)
+            onClick={() => {
+              setSelected(marker);
+              panTo(marker);
             }}
           ></Marker>
         );
       })}
       {selected ? (
         <InfoWindow
-          // anchor = {selected.name }
           position={{ lat: selected.lat, lng: selected.lng }}
           onCloseClick={() => {
             setSelected(null);
@@ -117,7 +120,7 @@ const RealMap = () => {
         >
           <div className="infoWindow">
             <h4 style={{ color: "black", textDecoration: "underline" }}>
-              {selected.name}
+              <Link to={`${url}/${selected.name}`}>{selected.name}</Link>
             </h4>
           </div>
         </InfoWindow>
