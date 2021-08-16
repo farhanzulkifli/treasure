@@ -94,13 +94,51 @@ textarea {
 .navBar {
   border: 1px solid black;
   height: 100%;
+  width: 18%;
   position: fixed;
   top: 0;
   display: block;
   overflow-x: hidden;
   padding-top: 60px;
-  background-color: #17252a;
+  background-color: #def2f1;
   z-index: 1;
+  color: #17252a;
+}
+
+.navBar .pic {
+  height: 150px;
+  border: 1px solid black;
+  border-radius: 75px;
+}
+
+.navBar .ProfilePic {
+  margin-left: 45px
+}
+
+.navBar h1{
+  padding-bottom: 10px;
+}
+
+.navBar li {
+  height: 40px;
+  padding-bottom: 10px;
+}
+
+.navBar img {
+  height: 30px;
+}
+
+.navBar li:hover {
+color: #3AAFA9;
+}
+
+
+
+.Link {
+  text-decoration: none;
+  color: inherit;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 40px;
 }
 
 @media (max-width: 960px) {
@@ -109,5 +147,8 @@ textarea {
   }
   .tweetPost {
     margin-left: 300px;
+  }
+  .navBar{
+    width:35%;
   }
 }
