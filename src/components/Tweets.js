@@ -1,24 +1,40 @@
 import React, {useState, useReducer } from "react";
-const axios = require("axios").default;
+import axios from "axios"
 
+const italic = {
+  fontStyle: "italic",
+};
 
+const bold = {
+  fontWeight: "bold",
+};
 
+const underline = {
+  textDecoration: "underline",
+};
+
+const normal = {
+  fontStyle: "normal",
+};
 
 function reducer(state, action) {
   switch (action.type) {
     case "bold":
-      return (state = "bold");
+      return (state = bold);
     case "italic":
-      return (state = "italic");
+      return (state = italic);
     case "underline":
-      return (state = "underline");
+      return (state = underline);
     default:
-      return (state = "normal");
+      return (state = normal);
   }
 }
 
 export default function Tweets() {
-  const [font, dispatch] = useReducer(reducer, normal);
+  const [font, dispatch] = useReducer(reducer, "normal");
+  const fakeTweets = ["test", "test2", "test3", "test4"];
+  const [term, setTerm] = useState("");
+
 
   //   axios.get('insert link here')
   //   .then(function (res: any){
@@ -41,24 +57,38 @@ export default function Tweets() {
   //       console.log(err)
   //   })
 
-  return (
-    <>
+  let handleSubmit = (e) => {
+    e.preventDefault();
+    fakeTweets.push(term);
+    console.log(fakeTweets);
+  };
+
+  const messages = fakeTweets.map((data) => {
+    return (
       <div className="tweetContainer">
         <div>
-          (Img) <span>John Doe</span>
+          (Img) <span style={bold}>John Doe</span>
         </div>
-        <p>Testing tweet</p>
+        <br/>
+        <div>{data}</div>
         <hr />
         <button>Like</button>
         <button>Share</button>
       </div>
+    );
+  });
+
+
+  return (
+    <>
+      <div className="board">{messages}</div>
       <form>
         <div className="tweetPost">
           <textarea
             className="textBox"
             placeholder="Tweet Here"
             maxLength={150}
-            style={font}
+            // style={font}
             required
           ></textarea>
           <div className="buttonContainer">
@@ -68,21 +98,21 @@ export default function Tweets() {
             <li
               className="formButton"
               onClick={() => dispatch({ type: "bold" })}
-              style="bold"
+              style={bold}
             >
               B
             </li>
             <li
               className="formButton"
               onClick={() => dispatch({ type: "italic" })}
-              style="italic"
+              style={italic}
             >
               I
             </li>
             <li
               className="formButton"
               onClick={() => dispatch({ type: "underline" })}
-              style="underline"
+              style={underline}
             >
               U
             </li>

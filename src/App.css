@@ -1,10 +1,15 @@
+*{
+  padding:0;
+  margin: 0;
+}
+
 .tweetContainer {
   box-sizing: border-box;
   border: 1px solid black;
   height: 200px;
-  width: 800px;
+  width: 500px;
   border-radius: 10px;
-  margin: 50px auto 50px auto;
+  margin: 5px auto 50px auto;
   color: #FEFFFF;
   background-color: #17252a;
   padding: 50px;
@@ -16,7 +21,7 @@
   height: 100px;
   width: 800px;
   border-radius: 10px;
-  margin: 50px auto 50px auto;
+  margin: 50px auto 0px auto;
   color: #FEFFFF;
   background-color: #17252a;
   overflow: hidden;
@@ -56,7 +61,34 @@ textarea {
 }
 
 .board {
-  border: 1px solid black;
+  position: relative;
   overflow-y: scroll;
-  overflow-y:auto;
+  overflow-x: auto;
+  height: 500px;
+  width:700px; 
+  margin: auto;
+
+}
+
+
+.board::-webkit-scrollbar-track{
+  width: 6px;
+}
+.board::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+}
+
+.board::-webkit-scrollbar-track{
+  background-color: transparent;
+}
+
+.navBar {
+  border: 1px solid black;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  display:block;
+  overflow-x: hidden;
+  padding-top: 60px;
+  padding-right: 10px;
 }
