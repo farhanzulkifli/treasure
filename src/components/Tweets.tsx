@@ -1,4 +1,5 @@
 import React, { CSSProperties, useState, useReducer } from "react";
+const axios = require("axios").default;
 
 const maxLength = 150;
 
@@ -33,6 +34,27 @@ function reducer(state: any, action: any): any {
 
 export default function Tweets() {
   const [font, dispatch] = useReducer(reducer, normal);
+
+  //   axios.get('insert link here')
+  //   .then(function (res: any){
+  //       console.log(res)
+  //   })
+  //   .catch(function(err: any){
+  //       console.log(err)
+  //   })
+  //   .then(function(){
+  //   })
+
+  //   axios.post('insert link here',{
+  //       userid: 'ID',
+  //       params: 'tweets'
+  //   })
+  //   .then(function (res: any){
+  //       console.log(res)
+  //   })
+  //   .catch(function(err: any){
+  //       console.log(err)
+  //   })
 
   return (
     <>
