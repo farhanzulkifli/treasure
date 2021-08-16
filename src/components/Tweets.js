@@ -31,7 +31,7 @@ function reducer(state, action) {
 }
 
 export default function Tweets() {
-  const [font, dispatch] = useReducer(reducer, "normal");
+  const [font, dispatch] = useReducer(reducer, normal);
   const fakeTweets = ["test", "test2", "test3", "test4"];
   const [term, setTerm] = useState("");
 
@@ -80,7 +80,7 @@ export default function Tweets() {
 
 
   return (
-    <>
+    <div className="container">
       <div className="board">{messages}</div>
       <form>
         <div className="tweetPost">
@@ -88,7 +88,7 @@ export default function Tweets() {
             className="textBox"
             placeholder="Tweet Here"
             maxLength={150}
-            // style={font}
+            style={font}
             required
           ></textarea>
           <div className="buttonContainer">
@@ -119,6 +119,6 @@ export default function Tweets() {
           </ul>
         </div>
       </form>
-    </>
+      </div>
   );
 }

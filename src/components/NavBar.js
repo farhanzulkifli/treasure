@@ -5,6 +5,8 @@ export default function NavBar() {
 	let { url } = useRouteMatch();
     
     return (
+        <div className="container">
+        <div className="container2">
         <div className="navBar">
             Nav Bar on the left side
             <div>(IMG)</div>
@@ -27,7 +29,10 @@ export default function NavBar() {
             </li>
             <li>
             <Link to = "/">Log Out</Link>
-            </li></ul>
+            </li>
+            </ul>
+        </div>
+        </div>
         </div>
     )
 }
