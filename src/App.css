@@ -1,41 +1,94 @@
-.App {
-  text-align: center;
+*{
+  padding:0;
+  margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.tweetContainer {
+  box-sizing: border-box;
+  border: 1px solid black;
+  height: 200px;
+  width: 500px;
+  border-radius: 10px;
+  margin: 5px auto 50px auto;
+  color: #FEFFFF;
+  background-color: #17252a;
+  padding: 50px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.tweetPost {
+  box-sizing: border-box;
+  border: 1px solid black;
+  height: 100px;
+  width: 800px;
+  border-radius: 10px;
+  margin: 50px auto 0px auto;
+  color: #FEFFFF;
+  background-color: #17252a;
+  overflow: hidden;
+  padding: 0px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.textBox {
+  height: 70px;
+  width: 100%;
+  border-radius: 10px;
+  border:hidden;
+  box-sizing: border-box;
 }
 
-.App-link {
-  color: #61dafb;
+.buttonContainer {
+  float:right;
+  margin-right: 5px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.horizontalList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
-/* .infoWindow{
-  color:black
-} */
+
+.formButton {
+  float:left;
+  padding-left: 12px;
+}
+
+textarea {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  outline:none;
+}
+
+.board {
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: auto;
+  height: 500px;
+  width:700px; 
+  margin: auto;
+
+}
+
+
+.board::-webkit-scrollbar-track{
+  width: 6px;
+}
+.board::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+}
+
+.board::-webkit-scrollbar-track{
+  background-color: transparent;
+}
+
+.navBar {
+  border: 1px solid black;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  display:block;
+  overflow-x: hidden;
+  padding-top: 60px;
+  padding-right: 10px;
+}
