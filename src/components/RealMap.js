@@ -6,9 +6,11 @@ import {
   useLoadScript,
 } from "@react-google-maps/api";
 import MapStyles from "./MapStyles";
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useCallback, useRef, useReducer } from "react";
 import treasure from "./treasure.svg";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
+import compass from "./compass.svg";
+import TreasureBar from "./TreasureBar";
 
 //importing libraries
 // const libraries = ["places"];
@@ -36,8 +38,6 @@ const locations = [
 const containerStyle = {
   width: "1200px",
   height: "600px",
-  margin: "auto",
-  marginTop: "50px",
 };
 
 const MapOptions = {
@@ -46,88 +46,133 @@ const MapOptions = {
   zoomControl: true,
 };
 
+function reducer(state, action) {
+  switch (action.type) {
+    case "turn":
+      return (state = true);
+    default:
+      return null;
+  }
+}
+
 //rendering map itself
 const RealMap = () => {
   //setting the state for markers
   //   const [map, setMap] = React.useState(null)
-  let { url } = useRouteMatch();
+  const [bool, dispatch] = useReducer(reducer, false);
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
   const [zoom, setZoom] = useState(12);
   const [center, setCenter] = useState({ lat: 1.3521, lng: 103.8198 });
-// const zoom = useRef(12)
-// const center = useRef({ lat: 1.3521, lng: 103.8198 })
+  let { path, url } = useRouteMatch();
+  // const zoom = useRef(12)
+  // const center = useRef({ lat: 1.3521, lng: 103.8198 })
 
   //calling api for markers
   useEffect(() => {
     setMarkers(locations);
-    return () => {};
+    // return () => {};
   }, []);
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
   }, []);
 
-  const panTo = useCallback((marker) => {
+  const panTo = useCallback((lat, lng) => {
     mapRef.current.setZoom(15);
-    mapRef.current.panTo({ lat: marker.lat, lng: marker.lng });
+    mapRef.current.panTo({ lat: lat, lng: lng });
+    console.log(lat, lng);
   }, []);
+
+  const Locate = ({ panTo }) => {
+    return (
+      <img
+        src={compass}
+        alt="compass - find me"
+        className="locate"
+        onClick={() => {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              console.log(position);
+              console.log(position.coords.longitude);
+              console.log(position.coords.latitude);
+              panTo(position.coords.latitude, position.coords.longitude);
+            },
+            () => null
+          );
+        }}
+      ></img>
+    );
+  };
 
   //when loaded, processes the map. If loading, writes a loading message. I not loaded, throws an error message.
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_API_KEY,
     // libraries,
   });
+
   if (loadError) return "Map loading error";
   if (!isLoaded) return "Loading Map";
 
   return (
-    <GoogleMap
-      mapContainerStyle={containerStyle}
-      center={center}
-      zoom={zoom}
-      options={MapOptions}
-      onLoad={onMapLoad}
-      onClick={() => {
-        setSelected(null);
-      }}
-    >
-      {markers.map((marker) => {
-        return (
-          <Marker
-            onLoad={onMapLoad}
-            key={marker.name}
-            position={{ lat: marker.lat, lng: marker.lng }}
-            icon={{
-              url: treasure,
-              scaledSize: new window.google.maps.Size(30, 30),
-              origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(15, 15),
+    <div className="wrapper">
+      <Locate panTo={panTo}></Locate>
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={zoom}
+        options={MapOptions}
+        onLoad={onMapLoad}
+        onClick={() => {
+          setSelected(null);
+        }}
+      >
+        {markers.map((marker) => {
+          return (
+            <Marker
+              onLoad={onMapLoad}
+              key={marker.name}
+              position={{ lat: marker.lat, lng: marker.lng }}
+              icon={{
+                url: treasure,
+                scaledSize: new window.google.maps.Size(30, 30),
+                origin: new window.google.maps.Point(0, 0),
+                anchor: new window.google.maps.Point(15, 15),
+              }}
+              onClick={() => {
+                setSelected(marker);
+                panTo(marker.lat, marker.lng);
+              }}
+            ></Marker>
+          );
+        })}
+        {selected ? (
+          <InfoWindow
+            position={{ lat: selected.lat, lng: selected.lng }}
+            onCloseClick={() => {
+              setSelected(null);
             }}
-            onClick={() => {
-              setSelected(marker);
-              panTo(marker);
-            }}
-          ></Marker>
-        );
-      })}
-      {selected ? (
-        <InfoWindow
-          position={{ lat: selected.lat, lng: selected.lng }}
-          onCloseClick={() => {
-            setSelected(null);
-          }}
-        >
-          <div className="infoWindow">
-            <h4 style={{ color: "black", textDecoration: "underline" }}>
-              <Link to={`${url}/${selected.name}`}>{selected.name}</Link>
-            </h4>
-          </div>
-        </InfoWindow>
-      ) : null}
-    </GoogleMap>
-
-    // </LoadScript>
+          >
+            <div className="infoWindow">
+              <h4 style={{ color: "black", textDecoration: "underline" }}>
+                <h4
+                // to={`${url}/${selected.name}`}
+                // onClick={() => ({ type: "turn" })}
+                >
+                  {selected.name}
+                </h4>
+              </h4>
+            </div>
+          </InfoWindow>
+        ) : null}
+      </GoogleMap>
+      {selected ? <TreasureBar selected={selected}></TreasureBar> : null}
+      {/* <Switch>
+        <Route path={`${path}/:treasurename`}>
+          <TreasureBar />
+        </Route>
+      </Switch> */}
+    </div>
   );
 };
 

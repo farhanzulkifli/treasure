@@ -102,12 +102,31 @@ textarea {
   background-color: #17252a;
   z-index: 1;
 }
+.wrapper {
+  position: relative;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+  margin-left: 300px
+}
+.locate{
+  position: absolute;
+  top:50px;
+  right:50px;
+  z-index:1;
+  width:50px;
+  cursor: pointer
+}
 
-@media (max-width: 960px) {
+@media (max-width: 1000px) {
   .board {
     margin-left: 300px;
   }
   .tweetPost {
     margin-left: 300px;
+  }
+  .locate{
+    right: 20px
   }
 }
