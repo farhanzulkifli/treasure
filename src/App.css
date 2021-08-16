@@ -95,3 +95,8 @@ textarea {
   outline:none;
 }
 
+.board {
+  border: 1px solid black;
+  overflow-y: scroll;
+  overflow-y:auto;
+}

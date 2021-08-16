@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function RealMap() {
+export default function TreasureFound() {
     return (
         <div>
-            REAL MAP
+            🤪 
         </div>
     )
 }

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import StaticMap from '../components/StaticMap'
-
 export default function Landing() {
     return (
         <div>
