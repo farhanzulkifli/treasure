@@ -94,6 +94,7 @@ textarea {
 .navBar {
   border: 1px solid black;
   height: 100%;
+  width: 15%;
   position: fixed;
   top: 0;
   display: block;
@@ -103,11 +104,30 @@ textarea {
   z-index: 1;
 }
 
+.navBar li {
+  height: 40px;
+  padding-bottom: 10px;
+}
+
+.navBar li:hover {
+color: #3AAFA9;
+}
+
+.Link {
+  text-decoration: none;
+  color: inherit;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 40px;
+}
+
 @media (max-width: 960px) {
   .board {
     margin-left: 300px;
   }
   .tweetPost {
     margin-left: 300px;
+  }
+  .navBar{
+    width:30%;
   }
 }

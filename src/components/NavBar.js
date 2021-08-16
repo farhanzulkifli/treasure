@@ -11,25 +11,13 @@ export default function NavBar() {
             Nav Bar on the left side
             <div>(IMG)</div>
             <p>Hello User,</p>
-            <ul>
-            <li>
-            <Link to = {`${url}/dashboard`}>Dashboard</Link>
-            </li>
-            <li>
-            <Link to = {`${url}/realmap`}>Map</Link>
-            </li>
-            <li>
-            <Link to = {`${url}/tweets`}>Tweets</Link>
-            </li>
-            <li>
-            <Link to = {`${url}/messages`}>Messages</Link>
-            </li>
-            <li>
-            <Link to = {`${url}/aboutus`}>About Us</Link>
-            </li>
-            <li>
-            <Link to = "/">Log Out</Link>
-            </li>
+            <ul >
+            <Link to = {`${url}/dashboard`} className="Link"><li>Dashboard</li></Link>
+            <Link to = {`${url}/realmap`} className="Link"><li>Map</li></Link>
+            <Link to = {`${url}/tweets`} className="Link"><li>Tweets</li></Link>
+            <Link to = {`${url}/messages`} className="Link"><li>Messages</li></Link>
+            <Link to = {`${url}/aboutus`} className="Link"><li>About Us</li></Link>
+            <Link to = "/" className="Link"><li>Log Out</li></Link>
             </ul>
         </div>
         </div>
