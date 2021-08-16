@@ -1,34 +1,19 @@
-import React, { CSSProperties, useState, useReducer } from "react";
+import React, {useState, useReducer } from "react";
 const axios = require("axios").default;
 
-const maxLength = 150;
 
-const italic: CSSProperties = {
-  fontStyle: "italic",
-};
 
-const bold: CSSProperties = {
-  fontWeight: "bold",
-};
 
-const underline: CSSProperties = {
-  textDecoration: "underline",
-};
-
-const normal: CSSProperties = {
-  fontStyle: "normal",
-};
-
-function reducer(state: any, action: any): any {
+function reducer(state, action) {
   switch (action.type) {
     case "bold":
-      return (state = bold);
+      return (state = "bold");
     case "italic":
-      return (state = italic);
+      return (state = "italic");
     case "underline":
-      return (state = underline);
+      return (state = "underline");
     default:
-      return (state = normal);
+      return (state = "normal");
   }
 }
 
@@ -72,7 +57,7 @@ export default function Tweets() {
           <textarea
             className="textBox"
             placeholder="Tweet Here"
-            maxLength={maxLength}
+            maxLength={150}
             style={font}
             required
           ></textarea>
@@ -83,21 +68,21 @@ export default function Tweets() {
             <li
               className="formButton"
               onClick={() => dispatch({ type: "bold" })}
-              style={bold}
+              style="bold"
             >
               B
             </li>
             <li
               className="formButton"
               onClick={() => dispatch({ type: "italic" })}
-              style={italic}
+              style="italic"
             >
               I
             </li>
             <li
               className="formButton"
               onClick={() => dispatch({ type: "underline" })}
-              style={underline}
+              style="underline"
             >
               U
             </li>
