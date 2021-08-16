@@ -1,5 +1,5 @@
-*{
-  padding:0;
+* {
+  padding: 0;
   margin: 0;
 }
 
@@ -10,7 +10,19 @@
   width: 500px;
   border-radius: 10px;
   margin: 5px auto 50px auto;
-  color: #FEFFFF;
+  color: #feffff;
+  background-color: #17252a;
+  padding: 50px;
+}
+
+.messageContainer {
+  box-sizing: border-box;
+  border: 1px solid black;
+  height: 100px;
+  width: 500px;
+  border-radius: 10px;
+  margin: 5px auto 50px auto;
+  color: #feffff;
   background-color: #17252a;
   padding: 50px;
 }
@@ -22,7 +34,7 @@
   width: 800px;
   border-radius: 10px;
   margin: 50px auto 0px auto;
-  color: #FEFFFF;
+  color: #feffff;
   background-color: #17252a;
   overflow: hidden;
   padding: 0px;
@@ -32,15 +44,14 @@
   height: 70px;
   width: 100%;
   border-radius: 10px;
-  border:hidden;
+  border: hidden;
   box-sizing: border-box;
 }
 
 .buttonContainer {
-  float:right;
+  float: right;
   margin-right: 5px;
 }
-
 
 .horizontalList {
   list-style-type: none;
@@ -50,14 +61,14 @@
 }
 
 .formButton {
-  float:left;
+  float: left;
   padding-left: 12px;
 }
 
 textarea {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
-  outline:none;
+  outline: none;
 }
 
 .board {
@@ -65,20 +76,18 @@ textarea {
   overflow-y: scroll;
   overflow-x: auto;
   height: 500px;
-  width:700px; 
+  width: 700px;
   margin: auto;
-
 }
 
-
-.board::-webkit-scrollbar-track{
+.board::-webkit-scrollbar-track {
   width: 6px;
 }
 .board::-webkit-scrollbar-thumb {
   background-color: darkgrey;
 }
 
-.board::-webkit-scrollbar-track{
+.board::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
@@ -87,8 +96,18 @@ textarea {
   height: 100%;
   position: fixed;
   top: 0;
-  display:block;
+  display: block;
   overflow-x: hidden;
   padding-top: 60px;
-  padding-right: 10px;
+  background-color: #17252a;
+  z-index: 1;
+}
+
+@media (max-width: 960px) {
+  .board {
+    margin-left: 300px;
+  }
+  .tweetPost {
+    margin-left: 300px;
+  }
 }

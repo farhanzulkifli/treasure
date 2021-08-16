@@ -67,7 +67,7 @@ export default function Messages() {
 
   const messages = fakeMessage.map((data) => {
     return (
-      <div className="tweetContainer">
+      <div className="messageContainer">
         <div>
         <span style={bold}>John Doe</span>
         </div>
