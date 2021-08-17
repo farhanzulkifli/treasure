@@ -6,9 +6,8 @@ import {
   useLoadScript,
 } from "@react-google-maps/api";
 import MapStyles from "./MapStyles";
-import { useEffect, useState, useCallback, useRef, useReducer } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import treasure from "./treasure.svg";
-import { Link, Switch, Route, useRouteMatch } from "react-router-dom";
 import compass from "./compass.svg";
 import TreasureBar from "./TreasureBar";
 
@@ -19,16 +18,37 @@ import TreasureBar from "./TreasureBar";
 const locations = [
   {
     name: "Treasure 1",
+    quiz: "What is the name of blablablabla",
+    mcq1: "Choice 1",
+    mcq2: "Choice 2",
+    mcq3: "Choice 3",
+    hunter: [],
+    answer: "Choice 1",
+    hint: "The treasure is hidden under blablablabla",
     lat: 1.349591,
     lng: 103.956787,
   },
   {
     name: "Treasure 2",
+    quiz: "What is the name of blablablabla",
+    mcq1: "Choice 1",
+    mcq2: "Choice 2",
+    mcq3: "Choice 3",
+    hunter: [],
+    answer: "Choice 1",
+    hint: "The treasure is hidden under blablablabla",
     lat: 1.35248,
     lng: 103.94461,
   },
   {
     name: "Treasure 3",
+    quiz: "What is the name of blablablabla",
+    mcq1: "Choice 1",
+    mcq2: "Choice 2",
+    mcq3: "Choice 3",
+    hunter: [],
+    answer: "Choice 1",
+    hint: "The treasure is hidden under blablablabla",
     lat: 1.35626197818541,
     lng: 103.83535857197133,
   },
@@ -36,8 +56,8 @@ const locations = [
 
 //map styling
 const containerStyle = {
-  width: "1200px",
-  height: "600px",
+  width: "100vw",
+  height: "100vh",
 };
 
 const MapOptions = {
@@ -46,25 +66,15 @@ const MapOptions = {
   zoomControl: true,
 };
 
-function reducer(state, action) {
-  switch (action.type) {
-    case "turn":
-      return (state = true);
-    default:
-      return null;
-  }
-}
-
 //rendering map itself
 const RealMap = () => {
   //setting the state for markers
   //   const [map, setMap] = React.useState(null)
-  const [bool, dispatch] = useReducer(reducer, false);
+  // const [bool, dispatch] = useReducer(reducer, false);
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
-  const [zoom, setZoom] = useState(12);
-  const [center, setCenter] = useState({ lat: 1.3521, lng: 103.8198 });
-  let { path, url } = useRouteMatch();
+  const [zoom] = useState(12);
+  const [center] = useState({ lat: 1.3521, lng: 103.8198 });
   // const zoom = useRef(12)
   // const center = useRef({ lat: 1.3521, lng: 103.8198 })
 

@@ -5,7 +5,6 @@ import RightContainer from '../components/RightContainer'
 export default function home() {
     return (
         <div>
-        HOME
         <NavBar/>
         <RightContainer/>
         </div>
