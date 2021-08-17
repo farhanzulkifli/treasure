@@ -24,7 +24,7 @@ let url = ""
 for(const i of locations){
 url += `%7C${i.lat},${i.long}`
 }
-console.log(url)
+// console.log(url)
 return (
     <div>
         <img src={`https://maps.googleapis.com/maps/api/staticmap?center=Singapore&zoom=11&size=600x380&maptype=roadmap&scale=2&map_id=53c641c1d183e837&key=${key}&markers=color:white%7Csize:tiny${url}`} alt="Nothing to see here" />

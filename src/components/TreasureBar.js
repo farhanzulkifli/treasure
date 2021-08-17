@@ -2,62 +2,20 @@ import { Marker } from "@react-google-maps/api";
 import React from "react";
 import { useEffect, useState } from "react";
 
-const locations = [
-  {
-    name: "Treasure 1",
-    quiz: "What is the name of blablablabla",
-    mcq1: "Choice 1",
-    mcq2: "Choice 2",
-    mcq3: "Choice 3",
-    hunter: [],
-    answer: "Choice 1",
-    hint: "The treasure is hidden under blablablabla",
-    lat: 1.349591,
-    lng: 103.956787,
-  },
-  {
-    name: "Treasure 2",
-    quiz: "What is the name of blablablabla",
-    mcq1: "Choice 1",
-    mcq2: "Choice 2",
-    mcq3: "Choice 3",
-    hunter: [],
-    answer: "Choice 1",
-    hint: "The treasure is hidden under blablablabla",
-    lat: 1.35248,
-    lng: 103.94461,
-  },
-  {
-    name: "Treasure 3",
-    quiz: "What is the name of blablablabla",
-    mcq1: "Choice 1",
-    mcq2: "Choice 2",
-    mcq3: "Choice 3",
-    hunter: [],
-    answer: "Choice 1",
-    hint: "The treasure is hidden under blablablabla",
-    lat: 1.35626197818541,
-    lng: 103.83535857197133,
-  },
-];
 
 const TreasureBar = (props) => {
+  console.log(props)
   const [markers, setMarkers] = useState([]);
   const [option, setOption] = useState([]);
-
-  let bool;
-
-  //   onChangeHandler = (e) =>{
-
-  //   }
+  const [answerBool, setAnswerBool] = useState("none")
+  
   const formSubmit = (e) => {
     e.preventDefault();
-    console.log(option);
+    if (option === props.selected.answer) {
+       setAnswerBool("correct");
+    }
+    else(setAnswerBool("incorrect"))
   };
-
-  useEffect(() => {
-    setMarkers(locations);
-  }, []);
 
   return (
     <div className="treasurebar">
@@ -65,7 +23,7 @@ const TreasureBar = (props) => {
         <li>Name: {props.selected.name}</li>
         <li>This is the quiz : {props.selected.quiz}</li>
       </ul>
-      <br/>
+      <br />
 
       <form onSubmit={formSubmit}>
         <div className="radio">
@@ -107,15 +65,24 @@ const TreasureBar = (props) => {
             {props.selected.mcq3}
           </label>
         </div>
-        <br/>
+        <br />
 
         {option ? (
           <>
-            <div>Selected option is : {option}</div>
+            {/* <div>Selected option is : {option}</div> */}
             <button className="btn btn-default" type="submit">
               Submit
             </button>
           </>
+        ) : null}
+        {answerBool === "correct" ? (
+            <div>You are correct!😊  Here is the hint: {props.selected.hint}</div> 
+        ) : null}
+        {answerBool === "incorrect" ? (
+            <div>Wrong! Try again!😞 </div> 
+        ) : null}
+        {answerBool === "none" ? (
+            <div>Pick an option 😇 </div> 
         ) : null}
         {/* <div>Selected option is : {this.state.selectedOption}</div>
         <button className="btn btn-default" type="submit">

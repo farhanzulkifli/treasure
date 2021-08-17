@@ -10,6 +10,7 @@ import { useEffect, useState, useCallback, useRef } from "react";
 import treasure from "./treasure.svg";
 import compass from "./compass.svg";
 import TreasureBar from "./TreasureBar";
+import axios from "axios";
 
 //importing libraries
 // const libraries = ["places"];
@@ -68,6 +69,7 @@ const MapOptions = {
 
 //rendering map itself
 const RealMap = () => {
+  require('dotenv').config()
   //setting the state for markers
   //   const [map, setMap] = React.useState(null)
   // const [bool, dispatch] = useReducer(reducer, false);
@@ -80,15 +82,33 @@ const RealMap = () => {
 
   //calling api for markers
   useEffect(() => {
-    setMarkers(locations);
-    // return () => {};
+    const baseUrl = process.env.REACT_APP_BASE_URL
+    axios
+      .get(baseUrl+"treasures/", {
+        headers: {
+          Authorization: localStorage.getItem("access_token")
+            ? "Bearer " + localStorage.getItem("access_token")
+            : null,
+        },
+      })
+      .then(function (res) {
+        setMarkers(res.data);
+        // console.log(markers)
+      })
+      .catch(function (err) {
+        console.log(err);
+      })
   }, []);
+
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
+    console.log(map)
   }, []);
+console.log(markers)
 
   const panTo = useCallback((lat, lng) => {
+    console.log(mapRef.current)
     mapRef.current.setZoom(15);
     mapRef.current.panTo({ lat: lat, lng: lng });
     console.log(lat, lng);
@@ -140,9 +160,9 @@ const RealMap = () => {
         {markers.map((marker) => {
           return (
             <Marker
-              onLoad={onMapLoad}
+              // onLoad={onMapLoad}
               key={marker.name}
-              position={{ lat: marker.lat, lng: marker.lng }}
+              position={{ lat: parseFloat(marker.lat), lng: parseFloat(marker.lng) }}
               icon={{
                 url: treasure,
                 scaledSize: new window.google.maps.Size(30, 30),
@@ -151,14 +171,14 @@ const RealMap = () => {
               }}
               onClick={() => {
                 setSelected(marker);
-                panTo(marker.lat, marker.lng);
+                panTo(parseFloat(marker.lat), parseFloat(marker.lng));
               }}
             ></Marker>
           );
         })}
         {selected ? (
           <InfoWindow
-            position={{ lat: selected.lat, lng: selected.lng }}
+            position={{ lat: parseFloat(selected.lat), lng: parseFloat(selected.lng) }}
             onCloseClick={() => {
               setSelected(null);
             }}
