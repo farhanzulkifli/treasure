@@ -1,8 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link, useRouteMatch } from "react-router-dom";
+import axios from "axios"
+require('dotenv').config()
+
+const base_url = process.env.REACT_APP_BASE_URL
 
 export default function NavBar() {
   let { url } = useRouteMatch();
+
+console.log(url)
+
 
   return (
     <div className="container">

@@ -193,6 +193,17 @@ textarea {
   font-weight: 700;
 }
 
+.SignInForm {
+  height: 200px;
+  width: 250px;
+  margin: auto;
+  padding: 25px;
+  background-color: #def2f1;
+  box-shadow: 5px 5px 8px #17252a;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 700;
+}
+
 .user-box {
   position: relative;
   
@@ -243,6 +254,14 @@ input:-webkit-autofill:active {
 }
 
 .SignUpForm h4, h3 {
+  margin-bottom: 20px;
+  margin-top: 0;
+  padding-top: 0;
+  text-align: center;
+  color: red;
+}
+
+.SignInForm h5 {
   margin-bottom: 20px;
   margin-top: 0;
   padding-top: 0;

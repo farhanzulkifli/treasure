@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
+require('dotenv').config()
 
-const url = "https://quiet-taiga-82025.herokuapp.com";
+const url = process.env.REACT_APP_BASE_URL
+
 
 export default function Register() {
   const [isConfirmPwdSame, setIsConfirmPwdSame] = useState(true);
