@@ -1,5 +1,8 @@
-import React, {useState, useReducer } from "react";
-// import axios from "axios"
+import React, {useState, useReducer, useEffect } from "react";
+import axios from "axios"
+require('dotenv').config()
+
+const url = process.env.REACT_APP_BASE_URL
 
 const italic = {
   fontStyle: "italic",
@@ -32,19 +35,50 @@ function reducer(state, action) {
 
 export default function Tweets() {
   const [font, dispatch] = useReducer(reducer, normal);
-  const fakeTweets = ["test", "test2", "test3", "test4"];
-  const [term, setTerm] = useState("");
+  const [user, setUser] = useState([]);
+  const [tweets, setTweets] = useState([])
 
+useEffect(() => {
+    axios.get(`${url}/tweets/`, {
+      headers: {
+        Authorization: localStorage.getItem("access_token")
+          ? "Bearer " + localStorage.getItem("access_token")
+          : null,
+      },
+    }
+    )
+    .then(function (res){
+        console.log(res)
+        setTweets((res.data).reverse())
+    })
+    .catch(function(err){
+        console.log(err)
+    })
+    .then(function(){
+    })
+  },[])
 
-  //   axios.get('insert link here')
-  //   .then(function (res: any){
+  // useEffect(() => {
+  //   axios.get(`${url}/user/`, {
+  //     headers: {
+  //       Authorization: localStorage.getItem("access_token")
+  //         ? "Bearer " + localStorage.getItem("access_token")
+  //         : null,
+  //     },
+  //   }
+  //   )
+  //   .then(function (res){
   //       console.log(res)
+  //       setUser(res.data)
   //   })
-  //   .catch(function(err: any){
+  //   .catch(function(err){
   //       console.log(err)
   //   })
   //   .then(function(){
   //   })
+  // },[])
+    
+console.log(tweets)
 
   //   axios.post('insert link here',{
   //       userid: 'ID',
@@ -59,21 +93,21 @@ export default function Tweets() {
 
   let handleSubmit = (e) => {
     e.preventDefault();
-    fakeTweets.push(term);
-    console.log(fakeTweets);
+
   };
 
-  const messages = fakeTweets.map((data) => {
+  const messages = tweets.map((data) => {
     return (
       <div className="tweetContainer">
         <div>
-          (Img) <span style={bold}>John Doe</span>
+        <img className="tweetPic"
+        src="https://img.icons8.com/ios-filled/50/000000/indiana-jones.png"
+            /> 
+        <span style={bold}>{data.author.username}</span>
         </div>
         <br/>
-        <div>{data}</div>
-        <hr />
+        <div className="tweetMessage">{data.message}</div>
         <button>Like</button>
-        <button>Share</button>
       </div>
     );
   });
@@ -81,7 +115,6 @@ export default function Tweets() {
 
   return (
     <div className="container">
-      <div className="board">{messages}</div>
       <form>
         <div className="tweetPost">
           <textarea
@@ -119,6 +152,7 @@ export default function Tweets() {
           </ul>
         </div>
       </form>
+      <div className="board">{messages}</div>
       </div>
   );
 }

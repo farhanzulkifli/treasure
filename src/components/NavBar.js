@@ -12,7 +12,6 @@ console.log(url)
 
 
   return (
-    <div className="container">
       <div className="container2">
         <div className="navBar">
           <div className="ProfilePic">
@@ -21,7 +20,7 @@ console.log(url)
               src="https://img.icons8.com/ios-filled/50/000000/indiana-jones.png"
             />
           </div>
-          <h1 className="ProfilePic">Hello User!</h1>
+          <h1 className="ProfilePic">Hello {localStorage.getItem("username")}!</h1>
           <ul>
             <Link to={`${url}/dashboard`} className="Link">
               <li>
@@ -62,6 +61,6 @@ console.log(url)
           </ul>
         </div>
       </div>
-    </div>
+
   );
 }

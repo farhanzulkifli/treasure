@@ -21,6 +21,7 @@ const handleLogin = (event) => {
     })
     .then(function (res) {
         console.log(res)
+        localStorage.setItem('username', username)
         localStorage.setItem('access_token', res.data.token)
         localStorage.setItem('refresh_token', res.data.refresh)
         console.log(localStorage)
