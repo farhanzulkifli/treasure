@@ -1,10 +1,14 @@
-import React from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import React, {useState} from 'react'
+import { useHistory,  } from 'react-router-dom'
 import axios from "axios";
+require('dotenv').config()
 
-const url = "https://quiet-taiga-82025.herokuapp.com";
+const url = process.env.REACT_APP_BASE_URL
+console.log(url)
 
 export default function Login() {
+
+const [userWrong, setUserWrong] = useState(false)
 let history = useHistory();
 
 const handleLogin = (event) => {
@@ -17,19 +21,21 @@ const handleLogin = (event) => {
     })
     .then(function (res) {
         console.log(res)
+        localStorage.setItem('username', username)
         localStorage.setItem('access_token', res.data.token)
         localStorage.setItem('refresh_token', res.data.refresh)
         console.log(localStorage)
         history.push("/home/realmap")
     })
     .catch(function (err) {
-        console.log(err);
+        console.log(err)
+        setUserWrong(true);
       });
 }
 
 
     return (
-        <div className="SignUpForm">
+        <div className="SignInForm">
             <form onSubmit={handleLogin}>
             <div className="user-box">
             <input type="text" name="username" required />
@@ -39,9 +45,9 @@ const handleLogin = (event) => {
             <input type="password" name="password" required />
             <label>Password</label>
           </div>
-          <button>Submit</button>
+          <button className="btstyle">Login</button>
             </form>
-             <Link to = "/home/realmap">After Logging in,</Link>
-        </div>
+            {userWrong && <h5>Incorrect Username/Password</h5>}
+         </div>
     )
 }

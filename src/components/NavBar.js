@@ -1,11 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link, useRouteMatch } from "react-router-dom";
+import axios from "axios"
+require('dotenv').config()
+
+const base_url = process.env.REACT_APP_BASE_URL
 
 export default function NavBar() {
   let { url } = useRouteMatch();
 
+console.log(url)
+
+
   return (
-    <div className="container">
       <div className="container2">
         <div className="navBar">
           <div className="ProfilePic">
@@ -14,7 +20,7 @@ export default function NavBar() {
               src="https://img.icons8.com/ios-filled/50/000000/indiana-jones.png"
             />
           </div>
-          <h1 className="ProfilePic">Hello User!</h1>
+          <h1 className="ProfilePic">Hello {localStorage.getItem("username")}!</h1>
           <ul>
             <Link to={`${url}/dashboard`} className="Link">
               <li>
@@ -55,6 +61,6 @@ export default function NavBar() {
           </ul>
         </div>
       </div>
-    </div>
+
   );
 }
