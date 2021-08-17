@@ -152,3 +152,82 @@ color: #3AAFA9;
     width:35%;
   }
 }
+
+.SignUpForm {
+  height: auto;
+  width: 250px;
+  margin: auto;
+  padding: 25px;
+  background-color: #def2f1;
+  box-shadow: 5px 5px 8px #17252a;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 700;
+}
+
+.user-box {
+  position: relative;
+  
+}
+
+.user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: black;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  background: transparent;
+}
+
+.user-box label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: black;
+  pointer-events: none;
+  transition: 0.5s;
+}
+.user-box input:focus ~ label,
+.user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: black;
+  font-size: 12px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.SignUpForm h1 {
+  margin-bottom: 20px;
+  margin-top: 0;
+  padding-top: 0;
+  text-align: left;
+}
+
+.btstyle {
+  border: 0;
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border-radius: 0.317rem;
+  background-color: #17252a;
+  color: #DEF2F1;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btstyle:hover {
+  opacity: 0.85;
+}

@@ -36,8 +36,8 @@ export default function Register() {
     }
     return (
     <>
-    <h1>Sign Up!</h1>
       <div className="SignUpForm">
+        <h1 style={{color:'#17252A'}}>Sign up</h1>
         <form onSubmit={handleRegisterUser}>
           <div className="user-box">
             <input type="text" name="username" required />
