@@ -5,6 +5,7 @@ import Dashboard from './Dashboard'
 import Messages from './Messages'
 import RealMap from './RealMap'
 import Tweets from './Tweets'
+// import TreasureBar from './TreasureBar'
 
 export default function RightContainer() {
     const {path} = useRouteMatch()
@@ -16,6 +17,8 @@ export default function RightContainer() {
             <Route path = {`${path}/tweets`} component = {Tweets}/>
             <Route path = {`${path}/messages`} component = {Messages}/>
             <Route path = {`${path}/aboutus`} component = {AboutUs}/>
+            {/* <Route path = {`${path}/realmap/:treasurename`} component = {TreasureBar}/> */}
+
         </Switch>
         </div>
     )
