@@ -183,7 +183,7 @@ textarea {
 }
 
 .SignUpForm {
-  height: auto;
+  height: 450px;
   width: 250px;
   margin: auto;
   padding: 25px;
@@ -240,6 +240,14 @@ input:-webkit-autofill:active {
   margin-top: 0;
   padding-top: 0;
   text-align: left;
+}
+
+.SignUpForm h4, h3 {
+  margin-bottom: 20px;
+  margin-top: 0;
+  padding-top: 0;
+  text-align: center;
+  color: red;
 }
 
 .btstyle {

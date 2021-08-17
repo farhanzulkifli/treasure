@@ -1,15 +1,15 @@
-import React, {useState} from 'react'
-import { Link, Redirect } from 'react-router-dom'
-import axios from "axios"
+import React, { useState } from "react";
+import { Link, Redirect } from "react-router-dom";
+import axios from "axios";
 
-
+const url = "https://quiet-taiga-82025.herokuapp.com";
 
 export default function Register() {
+  const [isConfirmPwdSame, setIsConfirmPwdSame] = useState(true);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [valid, setValid] = useState(false);
 
-    const [isConfirmPwdSame, setIsConfirmPwdSame] = useState(true);
-    const [isSuccess, setIsSuccess] = useState(false);
-    const [valid, setValid] = useState(false)
-    const handleRegisterUser = (event) => {
+  const handleRegisterUser = (event) => {
     event.preventDefault();
     setIsConfirmPwdSame(true);
     setValid(false);
@@ -17,27 +17,29 @@ export default function Register() {
       setIsConfirmPwdSame(false);
       return;
     }
+
     axios
-      .post("insert link here", {
-        userid: "ID",
-        params: "message here",
+      .post(`${url}/user/signup/`, {
+        username: event.target.username.value,
+        password: event.target.password.value,
+        email: event.target.email.value,
       })
       .then(function (res) {
         console.log(res);
-        if (res.status === 200) {
-            setIsSuccess(true);
-        }else if (res.status===409){
-            setValid(true)
+        if (res.status === 201) {
+          setIsSuccess(true);
         }
       })
       .catch(function (err) {
         console.log(err);
+          setValid(true);
       });
-    }
-    return (
+  };
+
+  return (
     <>
       <div className="SignUpForm">
-        <h1 style={{color:'#17252A'}}>Sign up</h1>
+        <h1 style={{ color: "#17252A" }}>Sign up</h1>
         <form onSubmit={handleRegisterUser}>
           <div className="user-box">
             <input type="text" name="username" required />
@@ -57,11 +59,11 @@ export default function Register() {
           </div>
           <button className="btstyle">Register</button>
         </form>
-        {!isConfirmPwdSame && <h3>Confirm Password Must Match</h3>}
-        {valid && <h3>Username Taken!</h3>}
-        {isSuccess && <Redirect to="/signupsuccess" />}
+        {!isConfirmPwdSame && <h3>Passwords Must Match</h3>}
+        {valid && <h4>Username/Email Taken!</h4>}
+        {isSuccess && <Redirect to="/login" />}
       </div>
-    <Link to = "/home">After Registering,</Link>
+      <Link to="/realmap">After Registering,</Link>
     </>
-    )
+  );
 }
