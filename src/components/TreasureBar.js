@@ -44,15 +44,14 @@ const locations = [
 const TreasureBar = (props) => {
   const [markers, setMarkers] = useState([]);
   const [option, setOption] = useState([]);
-
-  let bool;
-
-  //   onChangeHandler = (e) =>{
-
-  //   }
+  const [answerBool, setAnswerBool] = useState("none")
+  
   const formSubmit = (e) => {
     e.preventDefault();
-    console.log(option);
+    if (option === props.selected.answer) {
+       setAnswerBool("correct");
+    }
+    else(setAnswerBool("incorrect"))
   };
 
   useEffect(() => {
@@ -65,7 +64,7 @@ const TreasureBar = (props) => {
         <li>Name: {props.selected.name}</li>
         <li>This is the quiz : {props.selected.quiz}</li>
       </ul>
-      <br/>
+      <br />
 
       <form onSubmit={formSubmit}>
         <div className="radio">
@@ -107,15 +106,24 @@ const TreasureBar = (props) => {
             {props.selected.mcq3}
           </label>
         </div>
-        <br/>
+        <br />
 
         {option ? (
           <>
-            <div>Selected option is : {option}</div>
+            {/* <div>Selected option is : {option}</div> */}
             <button className="btn btn-default" type="submit">
               Submit
             </button>
           </>
+        ) : null}
+        {answerBool === "correct" ? (
+            <div>You are correct!😊  Here is the hint: {props.selected.hint}</div> 
+        ) : null}
+        {answerBool === "incorrect" ? (
+            <div>Wrong! Try again!😞 </div> 
+        ) : null}
+        {answerBool === "none" ? (
+            <div>Pick an option 😇 </div> 
         ) : null}
         {/* <div>Selected option is : {this.state.selectedOption}</div>
         <button className="btn btn-default" type="submit">

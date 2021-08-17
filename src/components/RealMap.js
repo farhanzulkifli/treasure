@@ -10,6 +10,7 @@ import { useEffect, useState, useCallback, useRef } from "react";
 import treasure from "./treasure.svg";
 import compass from "./compass.svg";
 import TreasureBar from "./TreasureBar";
+import axios from "axios";
 
 //importing libraries
 // const libraries = ["places"];
@@ -80,6 +81,15 @@ const RealMap = () => {
 
   //calling api for markers
   useEffect(() => {
+    axios.get('https://quiet-taiga-82025.herokuapp.com/treasures/')
+    .then(function (res){
+        console.log(res)
+    })
+    .catch(function(err){
+        console.log(err)
+    })
+    .then(function(){
+    })
     setMarkers(locations);
     // return () => {};
   }, []);
