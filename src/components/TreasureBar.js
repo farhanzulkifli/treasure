@@ -2,46 +2,9 @@ import { Marker } from "@react-google-maps/api";
 import React from "react";
 import { useEffect, useState } from "react";
 
-const locations = [
-  {
-    name: "Treasure 1",
-    quiz: "What is the name of blablablabla",
-    mcq1: "Choice 1",
-    mcq2: "Choice 2",
-    mcq3: "Choice 3",
-    hunter: [],
-    answer: "Choice 1",
-    hint: "The treasure is hidden under blablablabla",
-    lat: 1.349591,
-    lng: 103.956787,
-  },
-  {
-    name: "Treasure 2",
-    quiz: "What is the name of blablablabla",
-    mcq1: "Choice 1",
-    mcq2: "Choice 2",
-    mcq3: "Choice 3",
-    hunter: [],
-    answer: "Choice 1",
-    hint: "The treasure is hidden under blablablabla",
-    lat: 1.35248,
-    lng: 103.94461,
-  },
-  {
-    name: "Treasure 3",
-    quiz: "What is the name of blablablabla",
-    mcq1: "Choice 1",
-    mcq2: "Choice 2",
-    mcq3: "Choice 3",
-    hunter: [],
-    answer: "Choice 1",
-    hint: "The treasure is hidden under blablablabla",
-    lat: 1.35626197818541,
-    lng: 103.83535857197133,
-  },
-];
 
 const TreasureBar = (props) => {
+  console.log(props)
   const [markers, setMarkers] = useState([]);
   const [option, setOption] = useState([]);
   const [answerBool, setAnswerBool] = useState("none")
@@ -53,10 +16,6 @@ const TreasureBar = (props) => {
     }
     else(setAnswerBool("incorrect"))
   };
-
-  useEffect(() => {
-    setMarkers(locations);
-  }, []);
 
   return (
     <div className="treasurebar">
