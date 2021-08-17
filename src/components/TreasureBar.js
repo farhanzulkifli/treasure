@@ -1,20 +1,19 @@
-import { Marker } from "@react-google-maps/api";
 import React from "react";
 import { useEffect, useState } from "react";
+import CloudinaryUploadWidget from "./CloudinaryUploadWidget";
 
 
 const TreasureBar = (props) => {
-  console.log(props)
+  console.log(props);
   const [markers, setMarkers] = useState([]);
   const [option, setOption] = useState([]);
-  const [answerBool, setAnswerBool] = useState("none")
-  
+  const [answerBool, setAnswerBool] = useState("none");
+
   const formSubmit = (e) => {
     e.preventDefault();
     if (option === props.selected.answer) {
-       setAnswerBool("correct");
-    }
-    else(setAnswerBool("incorrect"))
+      setAnswerBool("correct");
+    } else setAnswerBool("incorrect");
   };
 
   return (
@@ -69,26 +68,29 @@ const TreasureBar = (props) => {
 
         {option ? (
           <>
-            {/* <div>Selected option is : {option}</div> */}
             <button className="btn btn-default" type="submit">
               Submit
             </button>
+            <br/>
           </>
         ) : null}
+<br/>
         {answerBool === "correct" ? (
-            <div>You are correct!😊  Here is the hint: {props.selected.hint}</div> 
+          <div>You are correct!😊 Here is the hint: {props.selected.hint}</div>
         ) : null}
-        {answerBool === "incorrect" ? (
-            <div>Wrong! Try again!😞 </div> 
-        ) : null}
-        {answerBool === "none" ? (
-            <div>Pick an option 😇 </div> 
-        ) : null}
-        {/* <div>Selected option is : {this.state.selectedOption}</div>
-        <button className="btn btn-default" type="submit">
-          Submit
-        </button> */}
-      </form>
+        {answerBool === "incorrect" ? <div>Wrong! Try again!😞 </div> : null}
+        {answerBool === "none" ? <div>Pick an option 😇 </div>: null}
+        </form>
+        
+        {answerBool === "correct" ? (
+        <div>
+          <br/>
+          Found the Treasure? Upload an Image and a description!
+          <br/>
+          <br/>
+          <CloudinaryUploadWidget/>
+        
+        </div>): null}
     </div>
   );
 };
