@@ -53,7 +53,7 @@ function CreateProfile() {
             <label>Address</label>
           </div>
           <div className="user-box">
-            <input type="text" name="age" required />
+            <input type="number" name="age" required />
             <label>Age</label>
           </div>
           <div className="user-box">

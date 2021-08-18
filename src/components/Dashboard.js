@@ -8,7 +8,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     axios
-      .get(`${url}/profile/`, {
+      .get(`${url}/user-profile/`, {
         headers: {
           Authorization: localStorage.getItem("access_token")
             ? "Bearer " + localStorage.getItem("access_token")

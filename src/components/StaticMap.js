@@ -51,9 +51,8 @@ url += `%7C${parseFloat(i.lat)},${parseFloat(i.lng)}`
 }
 console.log(url)
 return (
-    <div>
+    <div className = "center">
         <img src={`https://maps.googleapis.com/maps/api/staticmap?center=Singapore&zoom=11&size=600x380&maptype=roadmap&scale=2&map_id=53c641c1d183e837&key=${key}&markers=color:white%7Csize:tiny${url}`} alt="Nothing to see here" />
-        Static Map
     </div>
 )
 }
