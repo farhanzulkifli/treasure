@@ -23,6 +23,24 @@
 .tweetContainer span {
   position: relative;
 }
+.tweetContainer .like {
+  background: transparent;
+  outline: none;
+  border: none;
+  font-size: 15px;
+  position:relative;
+  top: -auto;
+}
+
+.tweetContainer .like:hover {
+content: '♥';
+color: red;
+}
+
+.tweetContainer .right {
+  position: relative;
+  float:right;
+}
 
 .tweetMessage {
   position:relative;

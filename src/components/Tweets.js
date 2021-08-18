@@ -1,8 +1,13 @@
-import React, {useState, useReducer, useEffect } from "react";
-import axios from "axios"
-require('dotenv').config()
+import React, { useState, useReducer, useEffect } from "react";
+import axios from "axios";
+import moment from "moment";
+import InfiniteScroll from "react-infinite-scroll-component";
 
-const url = process.env.REACT_APP_BASE_URL
+require("dotenv").config();
+
+console.log(moment().format("MMMM Do YYYY, h:mm:ss a"));
+
+const url = process.env.REACT_APP_BASE_URL;
 
 const italic = {
   fontStyle: "italic",
@@ -35,53 +40,54 @@ function reducer(state, action) {
 
 export default function Tweets() {
   const [font, dispatch] = useReducer(reducer, normal);
-  const [user, setUser] = useState([]);
-  const [tweets, setTweets] = useState([])
+  const [tweets, setTweets] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-useEffect(() => {
-    axios.get(`${url}/tweets/`, {
-      params: {
-        limit: 1
-      },
-      headers: {
-        Authorization: localStorage.getItem("access_token")
-          ? "Bearer " + localStorage.getItem("access_token")
-          : null,
-      },
-    }
-    )
-    .then(function (res){
-        console.log(res)
-        setTweets((res.data).reverse())
-    })
-    .catch(function(err){
-        console.log(err)
-    })
-    .then(function(){
-    })
-  },[])
+const FetchData = () => {
+  useEffect(() => {
+    axios
+      .get(`${url}/tweets/`, {
+        params: {
+          limit: 1,
+        },
+        headers: {
+          Authorization: localStorage.getItem("access_token")
+            ? "Bearer " + localStorage.getItem("access_token")
+            : null,
+        },
+      })
+      .then(function (res) {
+        console.log(res);
+        setTweets(res.data.reverse());
+      })
+      .catch(function (err) {
+        console.log(err);
+      })
+      .then(function () {});
+  }, [loading]);
+}
 
-//   useEffect(() => {
-//     axios.post(`${url}/user/`, {
-//       headers: {
-//         Authorization: localStorage.getItem("access_token")
-//           ? "Bearer " + localStorage.getItem("access_token")
-//           : null,
-//       },
-//     }
-//     )
-//     .then(function (res){
-//         console.log(res)
-//         setUser(res.data)
-//     })
-//     .catch(function(err){
-//         console.log(err)
-//     })
-//     .then(function(){
-//     })
-//   },[])
-    
-// console.log(tweets)
+  //   useEffect(() => {
+  //     axios.post(`${url}/user/`, {
+  //       headers: {
+  //         Authorization: localStorage.getItem("access_token")
+  //           ? "Bearer " + localStorage.getItem("access_token")
+  //           : null,
+  //       },
+  //     }
+  //     )
+  //     .then(function (res){
+  //         console.log(res)
+  //         setUser(res.data)
+  //     })
+  //     .catch(function(err){
+  //         console.log(err)
+  //     })
+  //     .then(function(){
+  //     })
+  //   },[])
+
+  // console.log(tweets)
 
   //   axios.post('insert link here',{
   //       userid: 'ID',
@@ -94,56 +100,76 @@ useEffect(() => {
   //       console.log(err)
   //   })
 
-  let onSubmit = (e) => {
-    e.preventDefault();
-  //     useEffect(() => {
-  //   axios.post(`${url}/user/`, {
-  //     headers: {
-  //       Authorization: localStorage.getItem("access_token")
-  //         ? "Bearer " + localStorage.getItem("access_token")
-  //         : null,
-  //     },
+  let onSubmit = (event) => {
+    event.preventDefault();
+    console.log(
+      localStorage.getItem("access_token")
+        ? "Bearer " + localStorage.getItem("access_token")
+        : null
+    );
+    console.log(event.target.message.value);
 
-  //   }
-  //   )
-  //   .then(function (res){
-  //       console.log(res)
-  //       setUser(res.data)
-  //   })
-  //   .catch(function(err){
-  //       console.log(err)
-  //   })
-  //   .then(function(){
-  //   })
-  // },[])
-console.log(new Date())
-console.log(tweets)
+    axios
+      .post(
+        `${url}/tweets/`,
+        {
+          message: event.target.message.value,
+          date: new Date(),
+        },
+        {
+          headers: {
+            Authorization: localStorage.getItem("access_token")
+              ? "Bearer " + localStorage.getItem("access_token")
+              : null,
+          },
+        }
+      )
+      .then(function (res) {
+        console.log(res);
+        setLoading(!loading);
+        event.target.message.value = "";
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
 
+    console.log(tweets);
+  };
+
+  let like = (event) => {
+    console.log("clicked");
+    console.log(event.currentTarget.value);
+    console.log(typeof event.currentTarget.style.cssText);
+    event.currentTarget.style.cssText = "color:red";
   };
 
   const messages = tweets.map((data, index) => {
     return (
       <div className="tweetContainer" key={index}>
         <div>
-        <img className="tweetPic"
-        src="https://img.icons8.com/ios-filled/50/000000/indiana-jones.png"
-            /> 
-        <span style={bold}>{data.author.username}</span>
+          <img
+            className="tweetPic"
+            src="https://img.icons8.com/ios-filled/50/000000/indiana-jones.png"
+          />
+          <span style={bold}>{data.author.username}</span>
+          <span className="right">{moment(data.date).fromNow()}</span>
         </div>
-        <br/>
+        <br />
         <div className="tweetMessage">{data.message}</div>
-        <button>Like</button>
+        <div className="like" style={{ color: "black" }} onClick={like}>
+          ♡
+        </div>
       </div>
     );
   });
 
-
   return (
     <div className="container">
-      <form handleSubmit={onSubmit}>
+      <form onSubmit={onSubmit}>
         <div className="tweetPost">
           <textarea
             className="textBox"
+            name="message"
             placeholder="Tweet Here"
             maxLength={150}
             style={font}
@@ -177,7 +203,21 @@ console.log(tweets)
           </ul>
         </div>
       </form>
-      <div className="board">{messages}</div>
+      <div className="board">
+        <InfiniteScroll
+          dataLength={messages.length}
+          next={FetchData()}
+          hasmore={true}
+          loader={<h4>Loading...</h4>}
+          endMessage={
+            <p style={{ textAlign: "center" }}>
+              <b>Yay! You've seen it all!</b>
+            </p>
+          }
+        >
+          {messages}
+        </InfiniteScroll>
       </div>
+    </div>
   );
 }
