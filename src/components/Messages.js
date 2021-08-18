@@ -1,5 +1,6 @@
 import React, { useState, useReducer, useEffect } from "react";
 import axios from "axios";
+import { Prompt } from "react-router-dom";
 require("dotenv").config();
 
 const url = process.env.REACT_APP_BASE_URL;
@@ -53,7 +54,7 @@ export default function Messages(prop) {
         .catch(function (err) {
           console.log(err);
         });
-  }, [loading]);
+  }, [loading,prop]);
 
   let handleSubmit = (event) => {
     event.preventDefault();
