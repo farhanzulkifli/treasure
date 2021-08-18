@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import axios from "axios";
-require('dotenv').config()
+require("dotenv").config();
 
-const url = process.env.REACT_APP_BASE_URL
-
+const url = process.env.REACT_APP_BASE_URL;
 
 export default function Register() {
   const [isConfirmPwdSame, setIsConfirmPwdSame] = useState(true);
@@ -28,13 +27,30 @@ export default function Register() {
       })
       .then(function (res) {
         console.log(res);
-        if (res.status === 201) {
-          setIsSuccess(true);
-        }
+        axios
+          .post(`${url}/user/login/`, {
+            username: event.target.username.value,
+            password: event.target.password.value,
+          })
+          .then(function (res) {
+            console.log(res)
+            if (res.status === 200) {
+              setIsSuccess(true);
+              console.log(res);
+              localStorage.setItem("username", event.target.username.value);
+              localStorage.setItem("access_token", res.data.token);
+              localStorage.setItem("refresh_token", res.data.refresh);
+              // localStorage.setItem('user_id', res.data)
+              console.log(localStorage);
+            }
+          })
+          .catch(function (err) {
+            console.log(err);
+          });
       })
       .catch(function (err) {
         console.log(err);
-          setValid(true);
+        setValid(true);
       });
   };
 
@@ -63,9 +79,8 @@ export default function Register() {
         </form>
         {!isConfirmPwdSame && <h3>Passwords Must Match</h3>}
         {valid && <h4>Username/Email Taken!</h4>}
-        {isSuccess && <Redirect to="/login" />}
+        {isSuccess && <Redirect to="/createprofile" />}
       </div>
-      <Link to="/realmap">After Registering,</Link>
     </>
   );
 }
