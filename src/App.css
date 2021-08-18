@@ -355,3 +355,6 @@ h3 {
   display: flex;
   justify-content: center;
 }
+.center li{
+list-style-type: none;
+}

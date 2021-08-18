@@ -18,7 +18,7 @@ export default function NavBar() {
           <div className="ProfilePic">
             <img
               className="pic"
-              src="https://img.icons8.com/ios-filled/50/000000/indiana-jones.png"
+              src="https://img.icons8.com/ios-filled/50/000000/indiana-jones.png" alt=""
             />
           </div>
           <h1 className="ProfilePic">Hello {localStorage.getItem("username")}!</h1>
