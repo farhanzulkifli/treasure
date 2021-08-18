@@ -1,18 +1,84 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import CloudinaryUploadWidget from "./CloudinaryUploadWidget";
-
+import axios from "axios";
 
 const TreasureBar = (props) => {
-  console.log(props);
-  const [markers, setMarkers] = useState([]);
+  // const [found, setFound] = useState([]);
   const [option, setOption] = useState([]);
-  const [answerBool, setAnswerBool] = useState("none");
+  const [answerBool, setAnswerBool] = useState("");
+  console.log(props);
+  console.log(localStorage);
+
+  // useEffect(() => {
+  //   const baseUrl = process.env.REACT_APP_BASE_URL
+  //   axios
+  //     .get(baseUrl+"/treasure/"+props.selected.name, {
+  //       headers: {
+  //         Authorization: localStorage.getItem("access_token")
+  //           ? "Bearer " + localStorage.getItem("access_token")
+  //           : null,
+  //       },
+  //     })
+  //     .then(function (res) {
+  //       console.log(res)
+  //       console.log(markers)
+  //       setMarkers(res.data[0]);
+  //     })
+  //     .catch(function (err) {
+  //       console.log(err);
+  //     })
+  // }, [props]);
+
+  useEffect(() => {
+    const baseUrl = process.env.REACT_APP_BASE_URL;
+    axios
+      .get(baseUrl + "/treasures/participated/", {
+        headers: {
+          Authorization: localStorage.getItem("access_token")
+            ? "Bearer " + localStorage.getItem("access_token")
+            : null,
+        },
+      })
+      .then(function (res) {
+        console.log(res);
+        // console.log(markers)
+        const found = res.data;
+        console.log(found);
+        const checkName = (obj) => obj.name === props.selected.name;
+        if (found.some(checkName) === true) {
+          setAnswerBool("correct");
+        } else setAnswerBool("none");
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  }, [props.selected.name]);
 
   const formSubmit = (e) => {
     e.preventDefault();
     if (option === props.selected.answer) {
       setAnswerBool("correct");
+      const baseUrl = process.env.REACT_APP_BASE_URL;
+
+      axios
+        .put(
+          baseUrl + "/treasure/" + props.selected.name,
+          {},
+          {
+            headers: {
+              Authorization: localStorage.getItem("access_token")
+                ? "Bearer " + localStorage.getItem("access_token")
+                : null,
+            },
+          }
+        )
+        .then(function (res) {
+          console.log(res);
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
     } else setAnswerBool("incorrect");
   };
 
@@ -71,26 +137,26 @@ const TreasureBar = (props) => {
             <button className="btn btn-default" type="submit">
               Submit
             </button>
-            <br/>
+            <br />
           </>
         ) : null}
-<br/>
+        <br />
         {answerBool === "correct" ? (
           <div>You are correct!😊 Here is the hint: {props.selected.hint}</div>
         ) : null}
         {answerBool === "incorrect" ? <div>Wrong! Try again!😞 </div> : null}
-        {answerBool === "none" ? <div>Pick an option 😇 </div>: null}
-        </form>
-        
-        {answerBool === "correct" ? (
+        {answerBool === "none" ? <div>Pick an option 😇 </div> : null}
+      </form>
+
+      {answerBool === "correct" ? (
         <div>
-          <br/>
+          <br />
           Found the Treasure? Upload an Image and a description!
-          <br/>
-          <br/>
-          <CloudinaryUploadWidget/>
-        
-        </div>): null}
+          <br />
+          <br />
+          <CloudinaryUploadWidget />
+        </div>
+      ) : null}
     </div>
   );
 };

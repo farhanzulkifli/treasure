@@ -84,7 +84,7 @@ const RealMap = () => {
   useEffect(() => {
     const baseUrl = process.env.REACT_APP_BASE_URL
     axios
-      .get(baseUrl+"treasures/", {
+      .get(baseUrl+"/treasures/", {
         headers: {
           Authorization: localStorage.getItem("access_token")
             ? "Bearer " + localStorage.getItem("access_token")
@@ -103,15 +103,15 @@ const RealMap = () => {
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
-    console.log(map)
+    // console.log(map)
   }, []);
-console.log(markers)
+// console.log(markers)
 
   const panTo = useCallback((lat, lng) => {
-    console.log(mapRef.current)
+    // console.log(mapRef.current)
     mapRef.current.setZoom(15);
     mapRef.current.panTo({ lat: lat, lng: lng });
-    console.log(lat, lng);
+    // console.log(lat, lng);
   }, []);
 
   const Locate = ({ panTo }) => {

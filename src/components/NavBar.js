@@ -52,7 +52,7 @@ export default function NavBar() {
             </Link>
             <Link to="/" className="Link">
               <li>
-                <img src="https://img.icons8.com/ios-glyphs/30/000000/logout-rounded-left.png" />
+                <img src="https://img.icons8.com/ios-glyphs/30/000000/logout-rounded-left.png" alt =""/>
                 Log Out
               </li>
             </Link>
