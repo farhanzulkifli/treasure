@@ -1,6 +1,8 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import axios from "axios"
+require('dotenv').config()
 
+const url = process.env.REACT_APP_BASE_URL
 
 const italic = {
     fontStyle: "italic",
@@ -32,60 +34,54 @@ function reducer(state, action) {
   }
 }
 
-export default function Messages() {
+export default function Messages(prop) {
   const [font, dispatch] = useReducer(reducer, normal);
-  const [term, setTerm] = useState("");
-  const fakeMessage = ["test", "test2"];
+  const [chat, setChat] = useState([]);
 
-  //   axios
-  //     .get("insert link here")
-  //     .then(function (res: any) {
-  //       console.log(res);
-  //     })
-  //     .catch(function (err: any) {
-  //       console.log(err);
-  //     })
-  //     .then(function () {});
-
-  //   axios
-  //     .post("insert link here", {
-  //       userid: "ID",
-  //       params: "message here",
-  //     })
-  //     .then(function (res: any) {
-  //       console.log(res);
-  //     })
-  //     .catch(function (err: any) {
-  //       console.log(err);
-  //     });
+useEffect(()=> {
+    axios
+      .get(`${url}/messages/${prop.data.id}`, {
+        headers: {
+          Authorization: localStorage.getItem("access_token")
+            ? "Bearer " + localStorage.getItem("access_token")
+            : null,
+        }
+      })
+      .then(function (res) {
+        console.log(res);
+      setChat(res.data)      
+    })
+      .catch(function (err) {
+        console.log(err);
+      });
+},[prop])
 
   let handleSubmit = (e) => {
     e.preventDefault();
-    fakeMessage.push(term);
-    console.log(fakeMessage);
   };
 
-  const messages = fakeMessage.map((data) => {
+  const messages = chat.map((data) => {
     return (
       <div className="messageContainer">
         <div>
         <span style={bold}>John Doe</span>
         </div>
         <br/>
-        <div>{data}</div>
+        <div>{data.dm}</div>
       </div>
     );
   });
 
   return (
     <>
+    <h1>You are chatting with {prop.data.username}</h1>
       <div className="board">{messages}</div>
       <form onSubmit={handleSubmit}>
         <div className="tweetPost">
           <textarea
             className="textBox"
             placeholder="Message Here"
-            onChange={(e) => setTerm(e.target.value)}
+            // onChange={(e) => setTerm(e.target.value)}
             maxLength={150}
             style={font}
             required

@@ -331,3 +331,18 @@ h3 {
 .btstyle:hover {
   opacity: 0.85;
 }
+
+.friendBar {
+  /* border: 1px solid black; */
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: block;
+  overflow-x: hidden;
+  padding-top: 60px;
+  background-color: #def2f1;
+  z-index: 1;
+  color: #17252a;
+}
