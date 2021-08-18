@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios"
-import {Link, Switch} from "react-router-dom"
 import Messages from "./Messages"
 
 require('dotenv').config()
