@@ -64,7 +64,7 @@ useEffect(()=> {
     return (
       <div className="messageContainer">
         <div>
-        <span style={bold}>John Doe</span>
+        <span style={bold}>{data.sender}</span>
         </div>
         <br/>
         <div>{data.dm}</div>
