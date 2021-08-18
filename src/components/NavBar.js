@@ -8,8 +8,6 @@ const base_url = process.env.REACT_APP_BASE_URL
 export default function NavBar() {
   let { url } = useRouteMatch();
 
-console.log(url)
-
 
   return (
       <div className="container2">

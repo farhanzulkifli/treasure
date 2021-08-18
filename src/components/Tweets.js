@@ -40,6 +40,9 @@ export default function Tweets() {
 
 useEffect(() => {
     axios.get(`${url}/tweets/`, {
+      params: {
+        limit: 1
+      },
       headers: {
         Authorization: localStorage.getItem("access_token")
           ? "Bearer " + localStorage.getItem("access_token")
@@ -58,27 +61,27 @@ useEffect(() => {
     })
   },[])
 
-  // useEffect(() => {
-  //   axios.get(`${url}/user/`, {
-  //     headers: {
-  //       Authorization: localStorage.getItem("access_token")
-  //         ? "Bearer " + localStorage.getItem("access_token")
-  //         : null,
-  //     },
-  //   }
-  //   )
-  //   .then(function (res){
-  //       console.log(res)
-  //       setUser(res.data)
-  //   })
-  //   .catch(function(err){
-  //       console.log(err)
-  //   })
-  //   .then(function(){
-  //   })
-  // },[])
+//   useEffect(() => {
+//     axios.post(`${url}/user/`, {
+//       headers: {
+//         Authorization: localStorage.getItem("access_token")
+//           ? "Bearer " + localStorage.getItem("access_token")
+//           : null,
+//       },
+//     }
+//     )
+//     .then(function (res){
+//         console.log(res)
+//         setUser(res.data)
+//     })
+//     .catch(function(err){
+//         console.log(err)
+//     })
+//     .then(function(){
+//     })
+//   },[])
     
-console.log(tweets)
+// console.log(tweets)
 
   //   axios.post('insert link here',{
   //       userid: 'ID',
@@ -91,14 +94,36 @@ console.log(tweets)
   //       console.log(err)
   //   })
 
-  let handleSubmit = (e) => {
+  let onSubmit = (e) => {
     e.preventDefault();
+  //     useEffect(() => {
+  //   axios.post(`${url}/user/`, {
+  //     headers: {
+  //       Authorization: localStorage.getItem("access_token")
+  //         ? "Bearer " + localStorage.getItem("access_token")
+  //         : null,
+  //     },
+
+  //   }
+  //   )
+  //   .then(function (res){
+  //       console.log(res)
+  //       setUser(res.data)
+  //   })
+  //   .catch(function(err){
+  //       console.log(err)
+  //   })
+  //   .then(function(){
+  //   })
+  // },[])
+console.log(new Date())
+console.log(tweets)
 
   };
 
-  const messages = tweets.map((data) => {
+  const messages = tweets.map((data, index) => {
     return (
-      <div className="tweetContainer">
+      <div className="tweetContainer" key={index}>
         <div>
         <img className="tweetPic"
         src="https://img.icons8.com/ios-filled/50/000000/indiana-jones.png"
@@ -115,7 +140,7 @@ console.log(tweets)
 
   return (
     <div className="container">
-      <form>
+      <form handleSubmit={onSubmit}>
         <div className="tweetPost">
           <textarea
             className="textBox"

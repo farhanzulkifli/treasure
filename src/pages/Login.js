@@ -1,10 +1,9 @@
 import React, {useState} from 'react'
-import { useHistory,  } from 'react-router-dom'
+import { useHistory} from 'react-router-dom'
 import axios from "axios";
 require('dotenv').config()
 
 const url = process.env.REACT_APP_BASE_URL
-console.log(url)
 
 export default function Login() {
 
@@ -24,6 +23,7 @@ const handleLogin = (event) => {
         localStorage.setItem('username', username)
         localStorage.setItem('access_token', res.data.token)
         localStorage.setItem('refresh_token', res.data.refresh)
+        // localStorage.setItem('user_id', res.data)
         console.log(localStorage)
         history.push("/home/realmap")
     })
