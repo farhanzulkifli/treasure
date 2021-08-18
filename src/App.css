@@ -28,23 +28,23 @@
   outline: none;
   border: none;
   font-size: 15px;
-  position:relative;
+  position: relative;
   top: -auto;
 }
 
 .tweetContainer .like:hover {
-content: '♥';
-color: red;
+  content: "♥";
+  color: red;
 }
 
 .tweetContainer .right {
   position: relative;
-  float:right;
+  float: right;
 }
 
 .tweetMessage {
-  position:relative;
-  top:-15px;
+  position: relative;
+  top: -15px;
 }
 
 .tweetPost {
@@ -345,4 +345,9 @@ h3 {
   background-color: #def2f1;
   z-index: 1;
   color: #17252a;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
 }

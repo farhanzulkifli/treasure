@@ -1,25 +1,24 @@
 import React, { useState, useReducer, useEffect } from "react";
-import axios from "axios"
-require('dotenv').config()
+import axios from "axios";
+require("dotenv").config();
 
-const url = process.env.REACT_APP_BASE_URL
+const url = process.env.REACT_APP_BASE_URL;
 
 const italic = {
-    fontStyle: "italic",
-  };
-  
-  const bold = {
-    fontWeight: "bold",
-  };
-  
-  const underline = {
-    textDecoration: "underline",
-  };
-  
-  const normal = {
-    fontStyle: "normal",
-  };
-  
+  fontStyle: "italic",
+};
+
+const bold = {
+  fontWeight: "bold",
+};
+
+const underline = {
+  textDecoration: "underline",
+};
+
+const normal = {
+  fontStyle: "normal",
+};
 
 function reducer(state, action) {
   switch (action.type) {
@@ -38,35 +37,55 @@ export default function Messages(prop) {
   const [font, dispatch] = useReducer(reducer, normal);
   const [chat, setChat] = useState([]);
 
-useEffect(()=> {
+  useEffect(() => {
+      axios
+        .get(`${url}/messages/${prop.data.id}`, {
+          headers: {
+            Authorization: localStorage.getItem("access_token")
+              ? "Bearer " + localStorage.getItem("access_token")
+              : null,
+          },
+        })
+        .then(function (res) {
+          setChat(res.data);
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+  }, [prop]);
+
+  let handleSubmit = (event) => {
+    event.preventDefault();
     axios
-      .get(`${url}/messages/${prop.data.id}`, {
-        headers: {
-          Authorization: localStorage.getItem("access_token")
-            ? "Bearer " + localStorage.getItem("access_token")
-            : null,
+      .post(
+        `${url}/messages/${prop.data.id}`,
+        {
+          dm: event.target.message.value,
+        },
+        {
+          headers: {
+            Authorization: localStorage.getItem("access_token")
+              ? "Bearer " + localStorage.getItem("access_token")
+              : null,
+          },
         }
-      })
+      )
       .then(function (res) {
         console.log(res);
-      setChat(res.data)      
-    })
+        event.target.message.value = "";
+      })
       .catch(function (err) {
         console.log(err);
       });
-},[prop])
-
-  let handleSubmit = (e) => {
-    e.preventDefault();
   };
 
   const messages = chat.map((data) => {
     return (
       <div className="messageContainer">
         <div>
-        <span style={bold}>{data.sender}</span>
+          <p style={bold}>{data.sender.username}</p>
         </div>
-        <br/>
+        <br />
         <div>{data.dm}</div>
       </div>
     );
@@ -74,11 +93,12 @@ useEffect(()=> {
 
   return (
     <>
-    <h1>You are chatting with {prop.data.username}</h1>
+      <h1 className="center">{prop.data.username}</h1>
       <div className="board">{messages}</div>
       <form onSubmit={handleSubmit}>
         <div className="tweetPost">
           <textarea
+            name="message"
             className="textBox"
             placeholder="Message Here"
             // onChange={(e) => setTerm(e.target.value)}

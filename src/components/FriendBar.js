@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios"
-import {Link, Switch} from "react-router-dom"
 import Messages from "./Messages"
 
 require('dotenv').config()
@@ -21,7 +20,7 @@ useEffect(() => {
     }
   })
   .then(function (res) {
-    console.log(res.data[0].friends);
+    console.log(res);
     setUserData(res.data[0])
     console.log(userData)
   })
@@ -34,7 +33,6 @@ const friendList = userData?.friends?.map((data) =>{
     return <h4 onClick={()=>setChat(data)}>{data.username}</h4>
   })
 
-  console.log(chat)
 
   return (
     <>
