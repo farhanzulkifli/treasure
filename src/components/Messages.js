@@ -39,6 +39,7 @@ export default function Messages(prop) {
   const [chat, setChat] = useState([]);
 
 useEffect(()=> {
+  const intervalId = setInterval(() => {
     axios
       .get(`${url}/messages/${prop.data.id}`, {
         headers: {
@@ -49,22 +50,46 @@ useEffect(()=> {
       })
       .then(function (res) {
         console.log(res);
-      setChat(res.data)      
+      setChat(res.data)
     })
       .catch(function (err) {
         console.log(err);
-      });
-},[prop])
+      })
+    }, 2000)
+  },[])
 
-  let handleSubmit = (e) => {
-    e.preventDefault();
+  let handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(event.target.message.value)
+    axios
+    .post(`${url}/messages/${prop.data.id}`,
+        {
+          dm:event.target.message.value
+    },
+      {
+      headers: {
+        Authorization: localStorage.getItem("access_token")
+          ? "Bearer " + localStorage.getItem("access_token")
+          : null,
+      },
+
+    })
+    .then(function (res) {
+      console.log(res);
+      event.target.message.value = ""
+  })
+    .catch(function (err) {
+      console.log(err);
+    });
   };
+
+  console.log(localStorage)
 
   const messages = chat.map((data) => {
     return (
       <div className="messageContainer">
         <div>
-        <span style={bold}>John Doe</span>
+        <p style={bold}>{data.sender.username}</p>
         </div>
         <br/>
         <div>{data.dm}</div>
@@ -74,11 +99,12 @@ useEffect(()=> {
 
   return (
     <>
-    <h1>You are chatting with {prop.data.username}</h1>
+    <h1 className="center">{prop.data.username}</h1>
       <div className="board">{messages}</div>
       <form onSubmit={handleSubmit}>
         <div className="tweetPost">
           <textarea
+            name="message"
             className="textBox"
             placeholder="Message Here"
             // onChange={(e) => setTerm(e.target.value)}

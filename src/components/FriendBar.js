@@ -21,7 +21,7 @@ useEffect(() => {
     }
   })
   .then(function (res) {
-    console.log(res.data[0].friends);
+    console.log(res);
     setUserData(res.data[0])
     console.log(userData)
   })
@@ -34,7 +34,6 @@ const friendList = userData?.friends?.map((data) =>{
     return <h4 onClick={()=>setChat(data)}>{data.username}</h4>
   })
 
-  console.log(chat)
 
   return (
     <>
