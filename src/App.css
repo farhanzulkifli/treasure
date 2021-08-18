@@ -170,6 +170,10 @@ textarea {
   list-style-type: none;
 }
 
+.navBar li:hover {
+cursor:pointer;
+}
+
 .navBar img {
   height: 30px;
 }

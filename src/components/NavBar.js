@@ -1,13 +1,16 @@
 import React, {useState} from "react";
-import { Link, useRouteMatch } from "react-router-dom";
-import axios from "axios"
+import { Link, useRouteMatch, useHistory } from "react-router-dom";
 require('dotenv').config()
-
-const base_url = process.env.REACT_APP_BASE_URL
 
 export default function NavBar() {
   let { url } = useRouteMatch();
+  const history = useHistory()
 
+  const logOut = () => {
+    localStorage.clear()
+    console.log(localStorage)
+    history.push("/")
+  }
 
   return (
       <div className="container2">
@@ -50,12 +53,10 @@ export default function NavBar() {
                 About Us
               </li>
             </Link>
-            <Link to="/" className="Link">
-              <li>
+              <li onClick={logOut} className="Link">
                 <img src="https://img.icons8.com/ios-glyphs/30/000000/logout-rounded-left.png" alt =""/>
                 Log Out
               </li>
-            </Link>
           </ul>
         </div>
       </div>

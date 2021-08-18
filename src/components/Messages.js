@@ -36,6 +36,7 @@ function reducer(state, action) {
 export default function Messages(prop) {
   const [font, dispatch] = useReducer(reducer, normal);
   const [chat, setChat] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
       axios
@@ -52,7 +53,7 @@ export default function Messages(prop) {
         .catch(function (err) {
           console.log(err);
         });
-  }, [prop]);
+  }, [loading]);
 
   let handleSubmit = (event) => {
     event.preventDefault();
@@ -73,6 +74,8 @@ export default function Messages(prop) {
       .then(function (res) {
         console.log(res);
         event.target.message.value = "";
+        setLoading(!loading);
+        
       })
       .catch(function (err) {
         console.log(err);
