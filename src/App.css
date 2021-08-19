@@ -402,3 +402,37 @@ datalist {
   border-bottom:1px solid #17252a;;
   transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
 }
+
+.dashboard{
+  height:300px;
+  width: 910px;
+  position:absolute;
+  left:20%;
+}
+.left{
+  /* left:61%;
+  top: 50%; */
+  position:relative;
+  height: 300px;
+  width: 300px;
+  border: 1px solid black;
+  text-align: center;
+  color: #17252a;
+  background-color: #def2f1;
+  float:right;
+}
+
+.dbfriendNames {
+  border-bottom: 1px solid;
+  width: 300px;
+  text-align: center;
+  background-color: #17252a;
+  color: #def2f1;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+  /* padding: 0.75rem 1rem; */
+  border-radius: 0.317rem;
+  list-style-type: none;
+}
