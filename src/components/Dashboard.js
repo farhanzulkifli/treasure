@@ -4,6 +4,8 @@ import axios from "axios";
 export default function Dashboard() {
   require("dotenv").config();
   const [userData, setUserData] = useState([]);
+  const [invite, setInvite] = useState([]);
+  const [loading, setLoading] = useState(false);
   const url = process.env.REACT_APP_BASE_URL;
 
   useEffect(() => {
@@ -23,17 +25,99 @@ export default function Dashboard() {
       .catch(function (err) {
         console.log(err);
       });
-  }, []);
-  // return(
-  //   <div></div>
-  // )
+  }, [loading]);
+
+  useEffect(() => {
+    axios
+      .get(`${url}/invitees/`, {
+        headers: {
+          Authorization: localStorage.getItem("access_token")
+            ? "Bearer " + localStorage.getItem("access_token")
+            : null,
+        },
+      })
+      .then(function (res) {
+        console.log(res);
+        setInvite(res.data);
+        console.log(invite);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  }, [loading]);
+  console.log(userData.friends);
+  console.log(invite);
+
+  const accept = (props) => {
+    axios
+    .put(`${url}/invitees/${props}/`,
+    {
+      status: "ACCEPT",
+    },
+    {
+      headers: {
+        Authorization: localStorage.getItem("access_token")
+          ? "Bearer " + localStorage.getItem("access_token")
+          : null,
+      },
+    })
+    .then(function (res) {
+      console.log(res)
+      // setInvite(res.data);
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+  };
+  
+  const pushFriend = (props) => {
+    axios
+    .put(`${url}/user-profile/${props}/`,
+    {},
+    {
+      headers: {
+        Authorization: localStorage.getItem("access_token")
+          ? "Bearer " + localStorage.getItem("access_token")
+          : null,
+      },
+    })
+    .then(function (res) {
+      console.log(res);
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+  };
+
+  const decline = (props) => {
+    axios
+    .put(`${url}/invitees/${props}/`,
+    {
+      status: "DECLINE",
+    },
+    {
+      headers: {
+        Authorization: localStorage.getItem("access_token")
+          ? "Bearer " + localStorage.getItem("access_token")
+          : null,
+      },
+    })
+    .then(function (res) {
+      console.log(res);
+      setInvite(res.data);
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+  };
+
   return (
     <div>
       <div className="center">
         <img
-          src="https://img.icons8.com/ios-filled/50/000000/indiana-jones.png"
-          alt=""
-        ></img>
+          src={userData.image_src}
+          alt="Profile Pic"
+        style = {{borderRadius: "100px", height:"150px"}}></img>
       </div>
       <div className="center">
         Username: {userData.user_id?.username}
@@ -49,8 +133,39 @@ export default function Dashboard() {
       <div className="center">
         Friends:
         <ul>
-          {userData.friends?.map((item) => {
-            return <li>{item.username}</li>
+          {userData.friends?.map((item, index) => {
+            return <li key={index}>{item.username}</li>;
+          })}
+        </ul>
+      </div>
+      <div className="center">
+        Friend Requests:
+        <ul>
+          {invite?.map((item) => {
+            return (
+              item.status === "PENDING" ? 
+              <li>
+                {item.inviter.username} {item.status}{" "}
+                <button
+                  onClick={(() => {
+                    accept(item.id)
+                    pushFriend(item.inviter.id)
+                    setLoading(!loading)
+                  })}
+                >
+                  Accept
+                </button>
+                <button
+                  onClick={(() => {
+                    decline(item.id)
+                    setLoading(!loading)
+                  })}
+                >
+                  Decline
+                </button>
+              </li>
+                :null
+            );
           })}
         </ul>
       </div>

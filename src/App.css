@@ -3,14 +3,11 @@
   margin: 0;
   position:relative;
 }
-
 .container {
   height: 1000px;
   width: 500px;
   margin: auto;
-  box-sizing: border-box;
 }
-
 .tweetContainer {
   box-sizing: border-box;
   height: auto;
@@ -21,7 +18,6 @@
   border: 1px solid white;
   border-top: none;
 }
-
 .tweetContainer span {
   position: relative;
 }
@@ -33,22 +29,18 @@
   position: relative;
   top: -auto;
 }
-
 .tweetContainer .like:hover {
   content: "♥";
   color: red;
 }
-
 .tweetContainer .right {
   position: relative;
   float: right;
 }
-
 .tweetMessage {
   position: relative;
   top: -15px;
 }
-
 .tweetPost {
   box-sizing: border-box;
   height: 100px;
@@ -60,7 +52,6 @@
   padding: 0px;
   border-bottom: 1px solid white;
 }
-
 .tweetPic {
   height: 70px;
   width: 70px;
@@ -71,7 +62,6 @@
   float: left;
   margin-right: 10px;
 }
-
 .messageContainer {
   box-sizing: border-box;
   border: 1px solid black;
@@ -83,58 +73,48 @@
   background-color: #17252a;
   padding: 50px;
 }
-
 .textBox {
   height: 70px;
   width: 100%;
   border: hidden;
   box-sizing: border-box;
 }
-
 .buttonContainer {
   float: right;
   margin-right: 5px;
 }
-
 .horizontalList {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
 }
-
 .formButton {
   float: left;
   padding-left: 12px;
 }
-
 textarea {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
   outline: none;
 }
-
 .board {
-  border: 1px solid black;
-  float:left;
-  overflow-y: none;
+  position: relative;
+  overflow-y: scroll;
   overflow-x: auto;
-  height: auto;
+  height: 500px;
   width: auto ;
   margin: auto;
 }
-
 .board::-webkit-scrollbar-track {
   width: 6px;
 }
 .board::-webkit-scrollbar-thumb {
   background-color: darkgrey;
 }
-
 .board::-webkit-scrollbar-track {
   background-color: transparent;
 }
-
 .navBar {
   /* border: 1px solid black; */
   height: 100%;
@@ -144,26 +124,22 @@ textarea {
   background-color: #def2f1;
   z-index: 1;
   color: #17252a;
-  position:fixed;
+  position: fixed;
   float:left;
 }
-
 .navBar .pic {
-  height: 150px;
-  border: 1px solid black;
+  height: 100px;
+  /* border: 1px solid black; */
   border-radius: 75px;
   overflow: hidden;
   background-color: #feffff;
 }
-
 .navBar .ProfilePic {
   margin-left: 45px;
 }
-
 .navBar h1 {
   padding-bottom: 10px;
 }
-
 .navBar li {
   height: 40px;
   padding-bottom: 10px;
@@ -172,25 +148,20 @@ textarea {
   list-style-type: none;
   display: flex;
 }
-
 .navBar li div {
   top: 5px;
   left: 5px;
   font-size: 15px;
 }
-
 .navBar li:hover {
 cursor:pointer;
 }
-
 .navBar img {
   height: 30px;
 }
-
 .navBar li:hover {
   color: #3aafa9;
 }
-
 .Link {
   text-decoration: none;
   color: inherit;
@@ -210,7 +181,6 @@ cursor:pointer;
   width: 50px;
   cursor: pointer;
 }
-
 .treasurebar {
   /* border: 1px solid black; */
   height: 100%;
@@ -228,8 +198,7 @@ cursor:pointer;
 .treasurebar .li {
   list-style-type: none;
 }
-
-/* @media (max-width: 1000px) {
+@media (max-width: 1000px) {
   .board {
     margin-left: 300px;
   }
@@ -237,8 +206,7 @@ cursor:pointer;
     margin-left: 300px;
     width: 500px;
   }
-} */
-
+}
 .SignUpForm {
   height: 450px;
   width: 250px;
@@ -249,7 +217,6 @@ cursor:pointer;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: 700;
 }
-
 .SignInForm {
   height: 200px;
   width: 250px;
@@ -260,11 +227,9 @@ cursor:pointer;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: 700;
 }
-
 .user-box {
   position: relative;
 }
-
 .user-box input {
   width: 100%;
   padding: 10px 0;
@@ -276,7 +241,6 @@ cursor:pointer;
   outline: none;
   background: transparent;
 }
-
 .user-box label {
   position: absolute;
   top: 0;
@@ -293,22 +257,20 @@ cursor:pointer;
   left: 0;
   color: black;
   font-size: 12px;
+  
 }
-
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
 }
-
 .SignUpForm h1 {
   margin-bottom: 20px;
   margin-top: 0;
   padding-top: 0;
   text-align: left;
 }
-
 .SignUpForm h4,
 h3 {
   margin-bottom: 20px;
@@ -317,7 +279,6 @@ h3 {
   text-align: center;
   color: red;
 }
-
 .SignInForm h5 {
   margin-bottom: 20px;
   margin-top: 0;
@@ -325,7 +286,6 @@ h3 {
   text-align: center;
   color: red;
 }
-
 .btstyle {
   border: 0;
   margin: 0;
@@ -340,11 +300,9 @@ h3 {
   cursor: pointer;
   width: 100%;
 }
-
 .btstyle:hover {
   opacity: 0.85;
 }
-
 .friendBar {
   /* border: 1px solid black; */
   height: 100%;
@@ -359,7 +317,6 @@ h3 {
   z-index: 1;
   color: #17252a;
 }
-
 .center {
   display: flex;
   justify-content: center;
@@ -367,7 +324,6 @@ h3 {
 .center li{
 list-style-type: none;
 }
-
 datalist {
   display:none;
 }
