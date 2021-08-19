@@ -1,6 +1,7 @@
 * {
   padding: 0;
   margin: 0;
+  position:relative;
 }
 
 .container {
@@ -117,7 +118,7 @@ textarea {
   overflow-y: scroll;
   overflow-x: auto;
   height: 500px;
-  width: 700px;
+  width: auto ;
   margin: auto;
 }
 
@@ -136,14 +137,13 @@ textarea {
   /* border: 1px solid black; */
   height: 100%;
   width: 250px;
-  position: fixed;
-  top: 0;
-  display: block;
   overflow-x: hidden;
   padding-top: 60px;
   background-color: #def2f1;
   z-index: 1;
   color: #17252a;
+  position: fixed;
+  float:left;
 }
 
 .navBar .pic {
@@ -165,9 +165,16 @@ textarea {
 .navBar li {
   height: 40px;
   padding-bottom: 10px;
-  margin-left: 20px;
+  margin-left: 50px;
   margin-top: 20px;
   list-style-type: none;
+  display: flex;
+}
+
+.navBar li div {
+  top: 5px;
+  left: 5px;
+  font-size: 15px;
 }
 
 .navBar li:hover {
@@ -357,4 +364,8 @@ h3 {
 }
 .center li{
 list-style-type: none;
+}
+
+datalist {
+  display:none;
 }

@@ -1,6 +1,5 @@
 import React, { useState, useReducer, useEffect } from "react";
 import axios from "axios";
-import { Prompt } from "react-router-dom";
 require("dotenv").config();
 
 const url = process.env.REACT_APP_BASE_URL;
@@ -38,23 +37,29 @@ export default function Messages(prop) {
   const [font, dispatch] = useReducer(reducer, normal);
   const [chat, setChat] = useState([]);
   const [loading, setLoading] = useState(false);
+  let element = document.getElementById("board");
+  const scroll = () => {
+    console.log("works")
+    setTimeout(function(){element.scrollTop = element.scrollHeight}, 1000)
+    }
+
 
   useEffect(() => {
-      axios
-        .get(`${url}/messages/${prop.data.id}`, {
-          headers: {
-            Authorization: localStorage.getItem("access_token")
-              ? "Bearer " + localStorage.getItem("access_token")
-              : null,
-          },
-        })
-        .then(function (res) {
-          setChat(res.data);
-        })
-        .catch(function (err) {
-          console.log(err);
-        });
-  }, [loading,prop]);
+    axios
+      .get(`${url}/messages/${prop.data.id}`, {
+        headers: {
+          Authorization: localStorage.getItem("access_token")
+            ? "Bearer " + localStorage.getItem("access_token")
+            : null,
+        },
+      })
+      .then(function (res) {
+        setChat(res.data);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  }, [loading, prop]);
 
   let handleSubmit = (event) => {
     event.preventDefault();
@@ -76,11 +81,11 @@ export default function Messages(prop) {
         console.log(res);
         event.target.message.value = "";
         setLoading(!loading);
-        
       })
       .catch(function (err) {
         console.log(err);
       });
+      scroll()
   };
 
   const messages = chat.map((data) => {
@@ -98,7 +103,9 @@ export default function Messages(prop) {
   return (
     <>
       <h1 className="center">{prop.data.username}</h1>
-      <div className="board">{messages}</div>
+      <div className="board" id="board">
+        {messages}
+      </div>
       <form onSubmit={handleSubmit}>
         <div className="tweetPost">
           <textarea
