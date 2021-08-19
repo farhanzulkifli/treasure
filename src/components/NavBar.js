@@ -13,7 +13,7 @@ export default function NavBar() {
   }
 
   return (
-      <div className="container2">
+      <div className="board">
         <div className="navBar">
           <div className="ProfilePic">
             <img

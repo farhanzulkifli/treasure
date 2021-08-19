@@ -103,7 +103,7 @@ export default function Messages(prop) {
   return (
     <>
       <h1 className="center">{prop.data.username}</h1>
-      <div className="board" id="board">
+      <div className="board">
         {messages}
       </div>
       <form onSubmit={handleSubmit}>

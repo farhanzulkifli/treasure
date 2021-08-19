@@ -164,7 +164,7 @@ const FetchData = () => {
   });
 
   return (
-    <div className="container">
+    <div className="board">
       <form onSubmit={onSubmit}>
         <div className="tweetPost">
           <textarea
@@ -205,7 +205,7 @@ const FetchData = () => {
       </form>
       <div className="board">
         <InfiniteScroll
-          dataLength={messages.length}
+          dataLength={10}
           next={FetchData()}
           hasmore={true}
           loader={<h4>Loading...</h4>}
