@@ -65,43 +65,37 @@ const TreasureBar = (props) => {
 
   const options = props.selected.hunters?.map((data) => {
     return (
-      <option value = {data}></option>
-    // <option value={`${data.user_id.username}#${data.user_id.id}`}></option>
+    <option value={`${data.username}#${data.id}`}></option>
     )
   })
 
-const handleSubmit = (event) =>{
-  event.preventDefault()
-  console.log("hello!")
-}
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    let hash = event.currentTarget.friend.value.toString().split('').indexOf('#')
+    let id = event.currentTarget.friend.value.toString().split("")
+    let sliced = parseInt(id.slice(hash+1).join(''))
+    console.log(sliced)
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault()
-  //   let hash = event.currentTarget.friend.value.toString().split('').indexOf('#')
-  //   let id = event.currentTarget.friend.value.toString().split("")
-  //   let sliced = parseInt(id.slice(hash+1).join(''))
-  //   console.log(sliced)
-
-  //   axios
-  //   .post(`${baseUrl}/inviters/`, {
-  //    invitee:sliced
-  //     },
-  //       {
-  //     headers: {
-  //       Authorization: localStorage.getItem("access_token")
-  //         ? "Bearer " + localStorage.getItem("access_token")
-  //         : null,
-  //     }
+    axios
+    .post(`${baseUrl}/inviters/`, {
+     invitee:sliced
+      },
+        {
+      headers: {
+        Authorization: localStorage.getItem("access_token")
+          ? "Bearer " + localStorage.getItem("access_token")
+          : null,
+      }
       
-  //   })
-  //   .then(function (res) {
-  //     console.log(res)
-  //     event.target.friend.value = ""
-  //   })
-  //   .catch(function (err) {
-  //     console.log(err);
-  //   });
-  // }
+    })
+    .then(function (res) {
+      console.log(res)
+      event.target.friend.value = ""
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+  }
 
   return (
     <div className="treasurebar">
@@ -178,8 +172,10 @@ const handleSubmit = (event) =>{
           <CloudinaryUploadWidget />
         </div>
       ) : null}
+      <br></br>
       <form onSubmit={handleSubmit}>
       <input type="text" list="search" name="friend" className="searchbar" placeholder="Search for user"/>
+      <br></br>
       <datalist id="search">
         {options}
       </datalist>
@@ -188,14 +184,5 @@ const handleSubmit = (event) =>{
     </div>
   );
 };
-//   {markers.map((marker) => {
-//     return <div>
-//         Name: {marker.name}
-//         This is the quiz: {marker.quiz}
-//         Hint: {marker.hint}
-
-//     </div>;
-//   })
-//   )
 
 export default TreasureBar;
