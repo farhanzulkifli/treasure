@@ -180,35 +180,39 @@ export default function Dashboard() {
         <img
           src={userData.image_src}
           alt="Profile Pic"
-          style={{ borderRadius: "100px", height: "150px" }}
+          style={{ borderRadius: "100px", height: "350px" }}
         ></img>
       </div>
       <div className="center">
-        Username: {userData.user_id?.username}
+        <h1>{userData.user_id?.username}</h1>
+        <br/>
+        <hr/>
+        AKA {userData.nickname}
         <br />
-        Nickname: {userData.nickname}
+        🎂{userData.age}
         <br />
-        Age: {userData.age}
+        🏠{userData.address}
         <br />
-        Address: {userData.address}
-        <br />
-        About Me: {userData.about_me}
+        👪 {userData.about_me}
       </div>
-      <div className="center">
-        Friends:
+      <hr/>
+      <div className="dashboard">
+      <div className="left">
+        <h1>Friend List</h1>
         <ul>
           {userData.friends?.map((item, index) => {
-            return <li key={index}>{item.username}</li>;
+            return <li className="dbfriendNames" key={index}>{item.username}</li>;
           })}
         </ul>
+
       </div>
-      <div className="center">
-        Friend requests received:
+      <div className="left">
+        <h1>Friend requests rec'd</h1>
         <ul>
           {invite?.map((item) => {
             return item.status === "PENDING" ? (
-              <li>
-                {item.inviter.username} {item.status}{" "}
+              <li className="dbfriendNames">
+                {item.inviter.username} {" "}
                 <button
                   onClick={() => {
                     accept(item.id);
@@ -232,18 +236,19 @@ export default function Dashboard() {
           })}
         </ul>
       </div>
-      <div className="center">
-        Friend requests sent:
+      <div className="left">
+        <h1>Friend requests sent</h1>
         <ul>
           {sentInvite?.map((item) => {
             return item.status === "PENDING" ? (
-              <li>
-                {item.invitee.username} {item.status}
+              <li className="dbfriendNames">
+                {item.invitee.username}
               </li>
             ) : null;
           })}
         </ul>
       </div>
+</div>
     </div>
   );
 }
