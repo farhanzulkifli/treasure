@@ -402,3 +402,44 @@ datalist {
   border-bottom:1px solid #17252a;;
   transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
 }
+
+.login1{
+  position: fixed;
+  right: 50px;
+  bottom: 34%;
+  text-decoration: none;
+  font-family: 'Georama', sans-serif;
+  font-size: 35px;
+  color:white
+}
+/* .login1 :hover{
+  text-decoration: underline;
+} */
+
+.register1{
+  position: fixed;
+  right: 50px;
+  bottom: 30%;
+  text-decoration: none;
+  font-family: 'Georama', sans-serif;
+  font-size: 35px;
+  color:white
+}
+/* .register1 :hover{
+  text-decoration: underline;
+} */
+.title{
+  position: fixed;
+  right: 50px;
+  bottom: 45%;
+  font-family: 'Georama', sans-serif;
+  font-size: 50px;
+}
+.active{
+  position: fixed;
+  right: 50px;
+  bottom: 42%;
+  font-family: 'Georama', sans-serif;
+  font-size: 30px;
+  color:#E4626B
+}

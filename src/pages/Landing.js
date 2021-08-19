@@ -1,13 +1,22 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import StaticMap from '../components/StaticMap'
+import React from "react";
+import { Link } from "react-router-dom";
+import StaticMap from "../components/StaticMap";
+// import LoginButtons from './LoginButtons'
 export default function Landing() {
-    return (
+  return (
+    <div>
+      <StaticMap />
         <div>
-        Landing
-        <StaticMap/>
-        <Link to = "/login">Login</Link>
-        <Link to = "/register">Register</Link>
+        <div className = "title">
+            Treasures
+        </div >
+          <Link to="/login" className="login1">
+            Login
+          </Link>
+          <Link to="/register" className="register1" >
+            Register
+          </Link>
         </div>
-    )
+    </div>
+  );
 }

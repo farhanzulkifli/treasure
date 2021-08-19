@@ -69,7 +69,7 @@ const MapOptions = {
 
 //rendering map itself
 const RealMap = () => {
-  require('dotenv').config()
+  require("dotenv").config();
   //setting the state for markers
   //   const [map, setMap] = React.useState(null)
   // const [bool, dispatch] = useReducer(reducer, false);
@@ -82,9 +82,9 @@ const RealMap = () => {
 
   //calling api for markers
   useEffect(() => {
-    const baseUrl = process.env.REACT_APP_BASE_URL
+    const baseUrl = process.env.REACT_APP_BASE_URL;
     axios
-      .get(baseUrl+"/treasures/", {
+      .get(baseUrl + "/treasures/", {
         headers: {
           Authorization: localStorage.getItem("access_token")
             ? "Bearer " + localStorage.getItem("access_token")
@@ -93,11 +93,11 @@ const RealMap = () => {
       })
       .then(function (res) {
         setMarkers(res.data);
-        // console.log(markers)
+        console.log(markers);
       })
       .catch(function (err) {
         console.log(err);
-      })
+      });
   }, []);
 
   const mapRef = useRef();
@@ -105,7 +105,7 @@ const RealMap = () => {
     mapRef.current = map;
     // console.log(map)
   }, []);
-// console.log(markers)
+  // console.log(markers)
 
   const panTo = useCallback((lat, lng) => {
     // console.log(mapRef.current)
@@ -162,7 +162,10 @@ const RealMap = () => {
             <Marker
               // onLoad={onMapLoad}
               key={marker.name}
-              position={{ lat: parseFloat(marker.lat), lng: parseFloat(marker.lng) }}
+              position={{
+                lat: parseFloat(marker.lat),
+                lng: parseFloat(marker.lng),
+              }}
               icon={{
                 url: treasure,
                 scaledSize: new window.google.maps.Size(30, 30),
@@ -178,20 +181,19 @@ const RealMap = () => {
         })}
         {selected ? (
           <InfoWindow
-            position={{ lat: parseFloat(selected.lat), lng: parseFloat(selected.lng) }}
+            position={{
+              lat: parseFloat(selected.lat),
+              lng: parseFloat(selected.lng),
+            }}
             onCloseClick={() => {
               setSelected(null);
             }}
           >
             <div className="infoWindow">
-              <h4 style={{ color: "black", textDecoration: "underline" }}>
-                <h4
-                // to={`${url}/${selected.name}`}
-                // onClick={() => ({ type: "turn" })}
-                >
-                  {selected.name}
-                </h4>
-              </h4>
+              {/* <div> */}
+                <h4 style={{ color: "black", textDecoration: "underline" }}>{selected.name}</h4>
+                <h2 style={{ color: "red", textAlign:"center"}}>{selected.money}</h2>
+              {/* </div> */}
             </div>
           </InfoWindow>
         ) : null}
