@@ -29,6 +29,8 @@ useEffect(() => {
   })
 },[])
 
+
+
 const friendList = userData?.friends?.map((data) =>{
     return <h4 onClick={()=>setChat(data)}>{data.username}</h4>
   })

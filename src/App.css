@@ -147,8 +147,8 @@ textarea {
 }
 
 .navBar .pic {
-  height: 150px;
-  border: 1px solid black;
+  height: 100px;
+  /* border: 1px solid black; */
   border-radius: 75px;
   overflow: hidden;
   background-color: #feffff;
@@ -284,6 +284,7 @@ cursor:pointer;
   left: 0;
   color: black;
   font-size: 12px;
+  
 }
 
 input:-webkit-autofill,
