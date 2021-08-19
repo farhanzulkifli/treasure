@@ -52,7 +52,7 @@
   box-sizing: border-box;
   height: 100px;
   width: 500px;
-  margin: 50px auto 0px auto;
+  margin: 0px auto 0px auto;
   color: #feffff;
   background-color: #17252a;
   overflow: hidden;
@@ -227,7 +227,7 @@ cursor:pointer;
   list-style-type: none;
 }
 
-@media (max-width: 1000px) {
+/* @media (max-width: 1000px) {
   .board {
     margin-left: 300px;
   }
@@ -235,7 +235,7 @@ cursor:pointer;
     margin-left: 300px;
     width: 500px;
   }
-}
+} */
 
 .SignUpForm {
   height: 450px;

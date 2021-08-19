@@ -1,9 +1,10 @@
 import React ,{Component} from "react";
 import { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect,useHistory } from "react-router-dom";
 import axios from "axios";
 
 function CreateProfile() {
+const history = useHistory()
   
     class CloudinaryUploadWidget extends Component {
     componentDidMount() {
@@ -64,7 +65,8 @@ function CreateProfile() {
       .then(function (res) {
         console.log(res);
         if (res.status === 200) {
-          setIsSuccess(true);
+        //   setIsSuccess(true);
+        history.push("/home/dashboard")
         }
       })
       .catch(function (err) {
@@ -77,6 +79,9 @@ function CreateProfile() {
     <>
       <div className="SignUpForm">
         <h1 style={{ color: "#17252A" }}>Create Profile</h1>
+        <div>
+            <CloudinaryUploadWidget />
+          </div>
         <form onSubmit={handleCreateProfile}>
           <div className="user-box">
             <input type="text" name="nickname" required/>
@@ -95,17 +100,15 @@ function CreateProfile() {
             <label>About Me</label>
           </div>
           <div className="user-box">
-            <input type="text" name="image_src"/>
+            <input type="text" name="image_src" defaultValue = {picture}/>
             <label>Image</label>
-          </div>
-          <div>
-            <CloudinaryUploadWidget />
           </div>
           <div>
             <button className="btstyle">Go</button>
           </div>
         </form>
-        {isSuccess && <Redirect to="/home/dashboard" />}
+        {/* {isSuccess && <Redirect to="/home/dashboard" />} */}
+      
       </div>
     </>
   );

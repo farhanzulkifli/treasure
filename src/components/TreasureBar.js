@@ -10,28 +10,9 @@ const TreasureBar = (props) => {
   console.log(props);
   console.log(localStorage);
 
-  // useEffect(() => {
-  //   const baseUrl = process.env.REACT_APP_BASE_URL
-  //   axios
-  //     .get(baseUrl+"/treasure/"+props.selected.name, {
-  //       headers: {
-  //         Authorization: localStorage.getItem("access_token")
-  //           ? "Bearer " + localStorage.getItem("access_token")
-  //           : null,
-  //       },
-  //     })
-  //     .then(function (res) {
-  //       console.log(res)
-  //       console.log(markers)
-  //       setMarkers(res.data[0]);
-  //     })
-  //     .catch(function (err) {
-  //       console.log(err);
-  //     })
-  // }, [props]);
-
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+  
   useEffect(() => {
-    const baseUrl = process.env.REACT_APP_BASE_URL;
     axios
       .get(baseUrl + "/treasures/participated/", {
         headers: {
@@ -81,6 +62,46 @@ const TreasureBar = (props) => {
         });
     } else setAnswerBool("incorrect");
   };
+
+  const options = props.selected.hunters?.map((data) => {
+    return (
+      <option value = {data}></option>
+    // <option value={`${data.user_id.username}#${data.user_id.id}`}></option>
+    )
+  })
+
+const handleSubmit = (event) =>{
+  event.preventDefault()
+  console.log("hello!")
+}
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault()
+  //   let hash = event.currentTarget.friend.value.toString().split('').indexOf('#')
+  //   let id = event.currentTarget.friend.value.toString().split("")
+  //   let sliced = parseInt(id.slice(hash+1).join(''))
+  //   console.log(sliced)
+
+  //   axios
+  //   .post(`${baseUrl}/inviters/`, {
+  //    invitee:sliced
+  //     },
+  //       {
+  //     headers: {
+  //       Authorization: localStorage.getItem("access_token")
+  //         ? "Bearer " + localStorage.getItem("access_token")
+  //         : null,
+  //     }
+      
+  //   })
+  //   .then(function (res) {
+  //     console.log(res)
+  //     event.target.friend.value = ""
+  //   })
+  //   .catch(function (err) {
+  //     console.log(err);
+  //   });
+  // }
 
   return (
     <div className="treasurebar">
@@ -157,6 +178,13 @@ const TreasureBar = (props) => {
           <CloudinaryUploadWidget />
         </div>
       ) : null}
+      <form onSubmit={handleSubmit}>
+      <input type="text" list="search" name="friend" className="searchbar" placeholder="Search for user"/>
+      <datalist id="search">
+        {options}
+      </datalist>
+      <button>Send Friend Request</button>
+      </form>
     </div>
   );
 };
