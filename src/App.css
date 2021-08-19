@@ -3,24 +3,21 @@
   margin: 0;
   position:relative;
 }
-
 .container {
-  height: 1000px;
-  width: 500px;
+  height: 90%;
+  width: 550px;
   margin: auto;
 }
-
 .tweetContainer {
   box-sizing: border-box;
   height: auto;
-  width: 500px;
+  width: auto;
   margin: 0px;
   color: #17252a;
   background-color: #def2f1;
   border: 1px solid white;
   border-top: none;
 }
-
 .tweetContainer span {
   position: relative;
 }
@@ -32,26 +29,22 @@
   position: relative;
   top: -auto;
 }
-
 .tweetContainer .like:hover {
   content: "♥";
   color: red;
 }
-
 .tweetContainer .right {
   position: relative;
   float: right;
 }
-
 .tweetMessage {
   position: relative;
   top: -15px;
 }
-
 .tweetPost {
   box-sizing: border-box;
   height: 100px;
-  width: 500px;
+  width: 550px;
   margin: 0px auto 0px auto;
   color: #feffff;
   background-color: #17252a;
@@ -59,7 +52,6 @@
   padding: 0px;
   border-bottom: 1px solid white;
 }
-
 .tweetPic {
   height: 70px;
   width: 70px;
@@ -70,17 +62,33 @@
   float: left;
   margin-right: 10px;
 }
-
-.messageContainer {
+.messageContainerRight {
   box-sizing: border-box;
-  border: 1px solid black;
-  height: 100px;
-  width: 500px;
+  min-height: 50px;
+  height: auto;
+  min-width: 300px;
+  width: auto;
   border-radius: 10px;
-  margin: 5px auto 50px auto;
+  margin: 5px auto 5px 100%;
   color: #feffff;
   background-color: #17252a;
-  padding: 50px;
+  text-align: center;
+  float:right;
+  padding:10px;
+}
+.messageContainerLeft {
+  box-sizing: border-box;
+  min-height: 50px;
+  height: auto;
+  min-width: 300px;
+  width: auto;
+  border-radius: 10px;
+  margin: 5px 100% 5px auto;
+  color: #feffff;
+  background-color: #2b7A78;
+  text-align: center;
+  float:left;
+  padding:10px;
 }
 
 .textBox {
@@ -89,79 +97,74 @@
   border: hidden;
   box-sizing: border-box;
 }
-
 .buttonContainer {
   float: right;
   margin-right: 5px;
 }
-
 .horizontalList {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
 }
-
 .formButton {
   float: left;
   padding-left: 12px;
 }
-
 textarea {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
   outline: none;
 }
 
-.board {
-  position: relative;
-  overflow-y: scroll;
+.tweetBoard {
+  overflow-y: none;
   overflow-x: auto;
-  height: 500px;
-  width: auto ;
-  margin: auto;
+  height: 650px;
+  width: auto;
+  margin-left: auto;
 }
+.messageBoard {
+  background-color:#def2f1;
+  overflow-y: none;
+  overflow-x: auto;
+  height: 650px;
+  width: 550px;
+  margin: 0px auto 0px auto;
 
+}
 .board::-webkit-scrollbar-track {
   width: 6px;
 }
 .board::-webkit-scrollbar-thumb {
   background-color: darkgrey;
 }
-
 .board::-webkit-scrollbar-track {
   background-color: transparent;
 }
-
 .navBar {
-  /* border: 1px solid black; */
   height: 100%;
   width: 250px;
   overflow-x: hidden;
-  padding-top: 60px;
+  padding-top: 30px;
   background-color: #def2f1;
   z-index: 1;
   color: #17252a;
   position: fixed;
   float:left;
 }
-
 .navBar .pic {
   height: 100px;
-  /* border: 1px solid black; */
   border-radius: 75px;
   overflow: hidden;
   background-color: #feffff;
 }
-
 .navBar .ProfilePic {
   margin-left: 45px;
 }
-
 .navBar h1 {
   padding-bottom: 10px;
 }
-
 .navBar li {
   height: 40px;
   padding-bottom: 10px;
@@ -170,32 +173,25 @@ textarea {
   list-style-type: none;
   display: flex;
 }
-
 .navBar li div {
   top: 5px;
   left: 5px;
   font-size: 15px;
 }
-
 .navBar li:hover {
 cursor:pointer;
 }
-
 .navBar img {
   height: 30px;
 }
-
 .navBar li:hover {
   color: #3aafa9;
 }
-
 .Link {
   text-decoration: none;
   color: inherit;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 20px;
-  /* margin: auto; */
-  /* margin-right: 10px */
 }
 .wrapper {
   display: flex;
@@ -208,9 +204,7 @@ cursor:pointer;
   width: 50px;
   cursor: pointer;
 }
-
 .treasurebar {
-  /* border: 1px solid black; */
   height: 100%;
   width: 250px;
   position: fixed;
@@ -226,7 +220,6 @@ cursor:pointer;
 .treasurebar .li {
   list-style-type: none;
 }
-
 /* @media (max-width: 1000px) {
   .board {
     margin-left: 300px;
@@ -236,7 +229,6 @@ cursor:pointer;
     width: 500px;
   }
 } */
-
 .SignUpForm {
   height: 450px;
   width: 250px;
@@ -247,7 +239,6 @@ cursor:pointer;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: 700;
 }
-
 .SignInForm {
   height: 200px;
   width: 250px;
@@ -258,11 +249,9 @@ cursor:pointer;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: 700;
 }
-
 .user-box {
   position: relative;
 }
-
 .user-box input {
   width: 100%;
   padding: 10px 0;
@@ -274,7 +263,6 @@ cursor:pointer;
   outline: none;
   background: transparent;
 }
-
 .user-box label {
   position: absolute;
   top: 0;
@@ -293,21 +281,18 @@ cursor:pointer;
   font-size: 12px;
   
 }
-
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
 }
-
 .SignUpForm h1 {
   margin-bottom: 20px;
   margin-top: 0;
   padding-top: 0;
   text-align: left;
 }
-
 .SignUpForm h4,
 h3 {
   margin-bottom: 20px;
@@ -316,7 +301,6 @@ h3 {
   text-align: center;
   color: red;
 }
-
 .SignInForm h5 {
   margin-bottom: 20px;
   margin-top: 0;
@@ -324,7 +308,6 @@ h3 {
   text-align: center;
   color: red;
 }
-
 .btstyle {
   border: 0;
   margin: 0;
@@ -339,13 +322,10 @@ h3 {
   cursor: pointer;
   width: 100%;
 }
-
 .btstyle:hover {
   opacity: 0.85;
 }
-
 .friendBar {
-  /* border: 1px solid black; */
   height: 100%;
   width: 250px;
   position: fixed;
@@ -358,7 +338,10 @@ h3 {
   z-index: 1;
   color: #17252a;
 }
+.friendBar h1{
+  text-align: center;
 
+}
 .center {
   display: flex;
   justify-content: center;
@@ -366,7 +349,56 @@ h3 {
 .center li{
 list-style-type: none;
 }
-
 datalist {
   display:none;
+}
+
+.friendNames {
+  position:relative;
+  border-bottom: 1px solid;
+  width: 100%;
+  text-align: center;
+  background-color: #17252a;
+  color: #def2f1;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+  padding: 0.75rem 1rem;
+  border-radius: 0.317rem;
+}
+
+.friendNames:hover {
+  opacity: 85%;
+  cursor:pointer
+}
+
+.searchbar {
+  height: 30px;
+  width: 100%;
+  border-style: none;
+  padding: 10px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  outline: none;
+  border-radius: 25px;
+  padding-right: 40px;
+  color:#17252a;
+  margin-bottom: 10px;
+}
+
+.searchbar::placeholder{
+  color:#17252a;
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-weight: 100;
+
+}
+
+.searchbar:focus{
+  width: 300px;
+  border-radius: 0px;
+  background-color: transparent;
+  border-bottom:1px solid #17252a;;
+  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
 }

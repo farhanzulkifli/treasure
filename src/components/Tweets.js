@@ -65,41 +65,8 @@ const FetchData = () => {
       })
       .then(function () {});
   }, [loading]);
+
 }
-
-  //   useEffect(() => {
-  //     axios.post(`${url}/user/`, {
-  //       headers: {
-  //         Authorization: localStorage.getItem("access_token")
-  //           ? "Bearer " + localStorage.getItem("access_token")
-  //           : null,
-  //       },
-  //     }
-  //     )
-  //     .then(function (res){
-  //         console.log(res)
-  //         setUser(res.data)
-  //     })
-  //     .catch(function(err){
-  //         console.log(err)
-  //     })
-  //     .then(function(){
-  //     })
-  //   },[])
-
-  // console.log(tweets)
-
-  //   axios.post('insert link here',{
-  //       userid: 'ID',
-  //       params: 'tweets'
-  //   })
-  //   .then(function (res: any){
-  //       console.log(res)
-  //   })
-  //   .catch(function(err: any){
-  //       console.log(err)
-  //   })
-
   let onSubmit = (event) => {
     event.preventDefault();
     console.log(
@@ -143,7 +110,9 @@ const FetchData = () => {
     event.currentTarget.style.cssText = "color:red";
   };
 
+
   const messages = tweets.map((data, index) => {
+    console.log(data)
     return (
       <div className="tweetContainer" key={index}>
         <div>
@@ -203,9 +172,9 @@ const FetchData = () => {
           </ul>
         </div>
       </form>
-      <div className="board">
+      <div className="tweetBoard">
         <InfiniteScroll
-          dataLength={messages.length}
+          dataLength={5}
           next={FetchData()}
           hasmore={true}
           loader={<h4>Loading...</h4>}

@@ -89,21 +89,25 @@ export default function Messages(prop) {
   };
 
   const messages = chat.map((data) => {
-    return (
-      <div className="messageContainer">
-        <div>
-          <p style={bold}>{data.sender.username}</p>
-        </div>
-        <br />
+    if(data.sender.username === localStorage.getItem("username")){
+      return (
+      <div className="messageContainerRight">
         <div>{data.dm}</div>
       </div>
     );
+    }else{
+      return (
+      <div className="messageContainerLeft">
+      <div>{data.dm}</div>
+    </div>)
+    }
+    
   });
 
   return (
     <>
       <h1 className="center">{prop.data.username}</h1>
-      <div className="board" id="board">
+      <div className="messageBoard" id="board">
         {messages}
       </div>
       <form onSubmit={handleSubmit}>
