@@ -50,12 +50,6 @@ export default function FriendBar() {
       });
   }, []);
 
-<<<<<<< HEAD
-
-
-const friendList = userData?.friends?.map((data) =>{
-    return <h4 onClick={()=>setChat(data)}>{data.username}</h4>
-=======
   const handleSubmit = (event) => {
     event.preventDefault()
     let hash = event.currentTarget.friend.value.toString().split('').indexOf('#')
@@ -92,7 +86,6 @@ const friendList = userData?.friends?.map((data) =>{
     return (
     <option value={`${data.user_id.username}#${data.user_id.id}`}></option>
     )
->>>>>>> c2a7d6f62298e44fd9c745058df3b5508ffe7acc
   })
 
 
